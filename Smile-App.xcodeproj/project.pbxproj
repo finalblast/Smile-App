@@ -8,11 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		505ECA201C8822B1002BC417 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA1F1C8822B1002BC417 /* AppDelegate.swift */; };
-		505ECA221C8822B2002BC417 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA211C8822B2002BC417 /* ViewController.swift */; };
 		505ECA251C8822B2002BC417 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505ECA231C8822B2002BC417 /* Main.storyboard */; };
 		505ECA271C8822B2002BC417 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505ECA261C8822B2002BC417 /* Images.xcassets */; };
 		505ECA2A1C8822B2002BC417 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505ECA281C8822B2002BC417 /* LaunchScreen.xib */; };
 		505ECA361C8822B2002BC417 /* Smile_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA351C8822B2002BC417 /* Smile_AppTests.swift */; };
+		505ECA401C88270F002BC417 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA3F1C88270F002BC417 /* MainViewController.swift */; };
+		505ECA421C882799002BC417 /* 9gagAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA411C882799002BC417 /* 9gagAPI.swift */; };
+		505ECA441C882F7B002BC417 /* PostStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA431C882F7B002BC417 /* PostStore.swift */; };
+		505ECA461C88323B002BC417 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA451C88323B002BC417 /* Post.swift */; };
+		505ECA481C88371C002BC417 /* Optional+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA471C88371C002BC417 /* Optional+Unwrap.swift */; };
+		505ECA4B1C8846D1002BC417 /* PostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA4A1C8846D1002BC417 /* PostDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +34,18 @@
 		505ECA1A1C8822B1002BC417 /* Smile-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smile-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		505ECA1E1C8822B1002BC417 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		505ECA1F1C8822B1002BC417 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		505ECA211C8822B2002BC417 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		505ECA241C8822B2002BC417 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		505ECA261C8822B2002BC417 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		505ECA291C8822B2002BC417 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		505ECA2F1C8822B2002BC417 /* Smile-AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Smile-AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		505ECA341C8822B2002BC417 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		505ECA351C8822B2002BC417 /* Smile_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Smile_AppTests.swift; sourceTree = "<group>"; };
+		505ECA3F1C88270F002BC417 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		505ECA411C882799002BC417 /* 9gagAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 9gagAPI.swift; sourceTree = "<group>"; };
+		505ECA431C882F7B002BC417 /* PostStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostStore.swift; sourceTree = "<group>"; };
+		505ECA451C88323B002BC417 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		505ECA471C88371C002BC417 /* Optional+Unwrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Optional+Unwrap.swift"; path = "Smile-App/Optional+Unwrap.swift"; sourceTree = "<group>"; };
+		505ECA4A1C8846D1002BC417 /* PostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +69,7 @@
 		505ECA111C8822B1002BC417 = {
 			isa = PBXGroup;
 			children = (
+				505ECA491C883722002BC417 /* Libraries */,
 				505ECA1C1C8822B1002BC417 /* Smile-App */,
 				505ECA321C8822B2002BC417 /* Smile-AppTests */,
 				505ECA1B1C8822B1002BC417 /* Products */,
@@ -78,7 +89,11 @@
 			isa = PBXGroup;
 			children = (
 				505ECA1F1C8822B1002BC417 /* AppDelegate.swift */,
-				505ECA211C8822B2002BC417 /* ViewController.swift */,
+				505ECA3F1C88270F002BC417 /* MainViewController.swift */,
+				505ECA411C882799002BC417 /* 9gagAPI.swift */,
+				505ECA431C882F7B002BC417 /* PostStore.swift */,
+				505ECA451C88323B002BC417 /* Post.swift */,
+				505ECA4A1C8846D1002BC417 /* PostDataSource.swift */,
 				505ECA231C8822B2002BC417 /* Main.storyboard */,
 				505ECA261C8822B2002BC417 /* Images.xcassets */,
 				505ECA281C8822B2002BC417 /* LaunchScreen.xib */,
@@ -110,6 +125,14 @@
 				505ECA341C8822B2002BC417 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		505ECA491C883722002BC417 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				505ECA471C88371C002BC417 /* Optional+Unwrap.swift */,
+			);
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,8 +235,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				505ECA221C8822B2002BC417 /* ViewController.swift in Sources */,
+				505ECA421C882799002BC417 /* 9gagAPI.swift in Sources */,
+				505ECA441C882F7B002BC417 /* PostStore.swift in Sources */,
+				505ECA4B1C8846D1002BC417 /* PostDataSource.swift in Sources */,
+				505ECA481C88371C002BC417 /* Optional+Unwrap.swift in Sources */,
 				505ECA201C8822B1002BC417 /* AppDelegate.swift in Sources */,
+				505ECA401C88270F002BC417 /* MainViewController.swift in Sources */,
+				505ECA461C88323B002BC417 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +433,7 @@
 				505ECA3B1C8822B2002BC417 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		505ECA3C1C8822B2002BC417 /* Build configuration list for PBXNativeTarget "Smile-AppTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +442,7 @@
 				505ECA3E1C8822B2002BC417 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
