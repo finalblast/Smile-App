@@ -18,6 +18,7 @@
 		505ECA461C88323B002BC417 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA451C88323B002BC417 /* Post.swift */; };
 		505ECA481C88371C002BC417 /* Optional+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA471C88371C002BC417 /* Optional+Unwrap.swift */; };
 		505ECA4B1C8846D1002BC417 /* PostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA4A1C8846D1002BC417 /* PostDataSource.swift */; };
+		50E51C761C89201300F77182 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E51C751C89201300F77182 /* PostCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		505ECA451C88323B002BC417 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		505ECA471C88371C002BC417 /* Optional+Unwrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Optional+Unwrap.swift"; path = "Smile-App/Optional+Unwrap.swift"; sourceTree = "<group>"; };
 		505ECA4A1C8846D1002BC417 /* PostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDataSource.swift; sourceTree = "<group>"; };
+		50E51C751C89201300F77182 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				505ECA431C882F7B002BC417 /* PostStore.swift */,
 				505ECA451C88323B002BC417 /* Post.swift */,
 				505ECA4A1C8846D1002BC417 /* PostDataSource.swift */,
+				50E51C751C89201300F77182 /* PostCollectionViewCell.swift */,
 				505ECA231C8822B2002BC417 /* Main.storyboard */,
 				505ECA261C8822B2002BC417 /* Images.xcassets */,
 				505ECA281C8822B2002BC417 /* LaunchScreen.xib */,
@@ -239,6 +242,7 @@
 				505ECA441C882F7B002BC417 /* PostStore.swift in Sources */,
 				505ECA4B1C8846D1002BC417 /* PostDataSource.swift in Sources */,
 				505ECA481C88371C002BC417 /* Optional+Unwrap.swift in Sources */,
+				50E51C761C89201300F77182 /* PostCollectionViewCell.swift in Sources */,
 				505ECA201C8822B1002BC417 /* AppDelegate.swift in Sources */,
 				505ECA401C88270F002BC417 /* MainViewController.swift in Sources */,
 				505ECA461C88323B002BC417 /* Post.swift in Sources */,

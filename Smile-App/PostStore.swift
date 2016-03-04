@@ -57,6 +57,13 @@ class PostStore {
     
     func fetchImageForPost(post: Post, completion: (ImageResult) -> Void) {
         
+        if let image = post.image {
+            
+            completion(ImageResult.Success(image))
+            return
+            
+        }
+        
         let postImageURL = post.imageURLs
         let normalPostImageString = postImageURL["normal"] as NSString
         let normalPostImageURL = NSURL(string: normalPostImageString)!

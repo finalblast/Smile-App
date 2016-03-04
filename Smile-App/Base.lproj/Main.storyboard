@@ -21,20 +21,41 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2T7-bS-daf">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="90" height="90"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UICollectionViewCell" id="5an-ci-ZCY">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UICollectionViewCell" id="5an-ci-ZCY" customClass="PostCollecionViewCell" customModule="Smile_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xam-8k-Oca">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                </imageView>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="dCO-hV-Taz">
+                                                    <rect key="frame" x="35" y="35" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottomMargin" secondItem="xam-8k-Oca" secondAttribute="bottom" constant="-8" id="75Z-TE-Tfx"/>
+                                            <constraint firstItem="xam-8k-Oca" firstAttribute="top" secondItem="5an-ci-ZCY" secondAttribute="topMargin" constant="-8" id="C2E-LE-Lr8"/>
+                                            <constraint firstItem="xam-8k-Oca" firstAttribute="leading" secondItem="5an-ci-ZCY" secondAttribute="leadingMargin" constant="-8" id="D2U-iZ-Vot"/>
+                                            <constraint firstAttribute="centerX" secondItem="dCO-hV-Taz" secondAttribute="centerX" id="MEC-F9-N1d"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="xam-8k-Oca" secondAttribute="trailing" constant="-8" id="ZQh-Qp-bbc"/>
+                                            <constraint firstAttribute="centerY" secondItem="dCO-hV-Taz" secondAttribute="centerY" id="sT5-ck-Rzt"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="xam-8k-Oca" id="0CK-YM-AzA"/>
+                                            <outlet property="spinner" destination="dCO-hV-Taz" id="N3z-jI-XZR"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

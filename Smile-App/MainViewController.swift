@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -20,6 +20,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.dataSource = postDataSource
+        collectionView.delegate = self
         
         store.fetchHotPosts { (postsResult) -> Void in
             
@@ -45,6 +46,28 @@ class MainViewController: UIViewController {
             })
             
         }
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let post = postDataSource.posts[indexPath.row]
+        store.fetchImageForPost(post, completion: { (imageResult) -> Void in
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                
+                let postIndex = find(self.postDataSource.posts, post)!
+                let postIndexPath = NSIndexPath(forRow: postIndex, inSection: 0)
+                
+                if let cell = collectionView.cellForItemAtIndexPath(postIndexPath) as? PostCollecionViewCell {
+                    
+                    cell.updateWithImage(post.image)
+                    
+                }
+                
+            })
+            
+        })
         
     }
     
