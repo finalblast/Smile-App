@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MainViewController: UIViewController, UICollectionViewDelegate {
     
@@ -19,11 +20,16 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         
         super.viewDidLoad()
         
+        if let layout = collectionView?.collectionViewLayout as? _9gagLayout {
+            
+            layout.delegate = self
+            
+        }
+        
         collectionView.dataSource = postDataSource
         collectionView.delegate = self
         
-        store.fetchHotPosts { (postsResult) -> Void in
-            
+        store.fetchPosts(method: Method.Fresh) { (postsResult) -> Void in
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 
                 switch postsResult {
@@ -32,7 +38,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
                     
                     println("Found \(posts.count)")
                     self.postDataSource.posts = posts
-                    
                     
                 case let PostResult.Failure(error):
                     
@@ -61,7 +66,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
                 
                 if let cell = collectionView.cellForItemAtIndexPath(postIndexPath) as? PostCollecionViewCell {
                     
-                    cell.updateWithImage(post.image)
+                    cell.updateWithPost(post)
                     
                 }
                 
@@ -71,4 +76,54 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "ShowPost" {
+            
+            if let selectedIndexPath = collectionView.indexPathsForSelectedItems()?.first as? NSIndexPath {
+                
+                let post = postDataSource.posts[selectedIndexPath.row]
+                let destinationVC = segue.destinationViewController as PostViewController
+                destinationVC.post = post
+                destinationVC.store = store
+                
+            }
+            
+        }
+        
+    }
+    
 }
+
+extension MainViewController: _9gagLayoutDelegate {
+
+    func collectionView(collecitonView: UICollectionView, heightForPostAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+    
+        let post = postDataSource.posts[indexPath.row]
+        let boundingRect =  CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT))
+        if let image = post.image {
+
+            let rect  = AVMakeRectWithAspectRatioInsideRect(post.image!.size, boundingRect)
+            return rect.size.height
+            
+        } else {
+            
+            return CGFloat(0)
+            
+        }
+    
+    }
+    
+    func collectionView(collecitonView: UICollectionView, heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+        
+        let annotationPadding = CGFloat(4)
+        let annotationHeaderHeight = CGFloat(17)
+        let post = postDataSource.posts[indexPath.row]
+        let commentHeight = CGFloat(106)
+        let height = annotationPadding + annotationHeaderHeight + commentHeight + annotationPadding
+        return height
+        
+    }
+
+}
+

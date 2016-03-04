@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		502BF9F21C896F2C004E8658 /* 9gagLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502BF9F11C896F2C004E8658 /* 9gagLayout.swift */; };
+		502BF9F41C898076004E8658 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502BF9F31C898076004E8658 /* ImageStore.swift */; };
 		505ECA201C8822B1002BC417 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA1F1C8822B1002BC417 /* AppDelegate.swift */; };
 		505ECA251C8822B2002BC417 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505ECA231C8822B2002BC417 /* Main.storyboard */; };
 		505ECA271C8822B2002BC417 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505ECA261C8822B2002BC417 /* Images.xcassets */; };
@@ -19,6 +21,7 @@
 		505ECA481C88371C002BC417 /* Optional+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA471C88371C002BC417 /* Optional+Unwrap.swift */; };
 		505ECA4B1C8846D1002BC417 /* PostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA4A1C8846D1002BC417 /* PostDataSource.swift */; };
 		50E51C761C89201300F77182 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E51C751C89201300F77182 /* PostCollectionViewCell.swift */; };
+		50E51C781C892BFF00F77182 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E51C771C892BFF00F77182 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		502BF9F11C896F2C004E8658 /* 9gagLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 9gagLayout.swift; sourceTree = "<group>"; };
+		502BF9F31C898076004E8658 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		505ECA1A1C8822B1002BC417 /* Smile-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smile-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		505ECA1E1C8822B1002BC417 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		505ECA1F1C8822B1002BC417 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,12 +47,13 @@
 		505ECA341C8822B2002BC417 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		505ECA351C8822B2002BC417 /* Smile_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Smile_AppTests.swift; sourceTree = "<group>"; };
 		505ECA3F1C88270F002BC417 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		505ECA411C882799002BC417 /* 9gagAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 9gagAPI.swift; sourceTree = "<group>"; };
-		505ECA431C882F7B002BC417 /* PostStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostStore.swift; sourceTree = "<group>"; };
-		505ECA451C88323B002BC417 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		505ECA411C882799002BC417 /* 9gagAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = 9gagAPI.swift; path = "Smile-App/9gagAPI.swift"; sourceTree = "<group>"; };
+		505ECA431C882F7B002BC417 /* PostStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostStore.swift; path = "Smile-App/PostStore.swift"; sourceTree = "<group>"; };
+		505ECA451C88323B002BC417 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = "Smile-App/Post.swift"; sourceTree = "<group>"; };
 		505ECA471C88371C002BC417 /* Optional+Unwrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Optional+Unwrap.swift"; path = "Smile-App/Optional+Unwrap.swift"; sourceTree = "<group>"; };
-		505ECA4A1C8846D1002BC417 /* PostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDataSource.swift; sourceTree = "<group>"; };
-		50E51C751C89201300F77182 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
+		505ECA4A1C8846D1002BC417 /* PostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostDataSource.swift; path = "Smile-App/PostDataSource.swift"; sourceTree = "<group>"; };
+		50E51C751C89201300F77182 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostCollectionViewCell.swift; path = "Smile-App/PostCollectionViewCell.swift"; sourceTree = "<group>"; };
+		50E51C771C892BFF00F77182 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +74,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		502BF9EA1C896DCA004E8658 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				505ECA451C88323B002BC417 /* Post.swift */,
+			);
+			name = DataModels;
+			sourceTree = "<group>";
+		};
+		502BF9EB1C896DDC004E8658 /* DataStores */ = {
+			isa = PBXGroup;
+			children = (
+				502BF9F31C898076004E8658 /* ImageStore.swift */,
+				505ECA431C882F7B002BC417 /* PostStore.swift */,
+			);
+			name = DataStores;
+			sourceTree = "<group>";
+		};
+		502BF9EC1C896DED004E8658 /* APIControls */ = {
+			isa = PBXGroup;
+			children = (
+				505ECA411C882799002BC417 /* 9gagAPI.swift */,
+			);
+			name = APIControls;
+			sourceTree = "<group>";
+		};
+		502BF9ED1C896E09004E8658 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				505ECA4A1C8846D1002BC417 /* PostDataSource.swift */,
+			);
+			name = DataSources;
+			sourceTree = "<group>";
+		};
+		502BF9EE1C896E26004E8658 /* CustomLayouts */ = {
+			isa = PBXGroup;
+			children = (
+				502BF9F11C896F2C004E8658 /* 9gagLayout.swift */,
+			);
+			name = CustomLayouts;
+			sourceTree = "<group>";
+		};
+		502BF9F51C899209004E8658 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				50E51C751C89201300F77182 /* PostCollectionViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		505ECA111C8822B1002BC417 = {
 			isa = PBXGroup;
 			children = (
+				502BF9F51C899209004E8658 /* Cells */,
+				502BF9EE1C896E26004E8658 /* CustomLayouts */,
+				502BF9ED1C896E09004E8658 /* DataSources */,
+				502BF9EC1C896DED004E8658 /* APIControls */,
+				502BF9EB1C896DDC004E8658 /* DataStores */,
+				502BF9EA1C896DCA004E8658 /* DataModels */,
 				505ECA491C883722002BC417 /* Libraries */,
 				505ECA1C1C8822B1002BC417 /* Smile-App */,
 				505ECA321C8822B2002BC417 /* Smile-AppTests */,
@@ -92,11 +153,7 @@
 			children = (
 				505ECA1F1C8822B1002BC417 /* AppDelegate.swift */,
 				505ECA3F1C88270F002BC417 /* MainViewController.swift */,
-				505ECA411C882799002BC417 /* 9gagAPI.swift */,
-				505ECA431C882F7B002BC417 /* PostStore.swift */,
-				505ECA451C88323B002BC417 /* Post.swift */,
-				505ECA4A1C8846D1002BC417 /* PostDataSource.swift */,
-				50E51C751C89201300F77182 /* PostCollectionViewCell.swift */,
+				50E51C771C892BFF00F77182 /* PostViewController.swift */,
 				505ECA231C8822B2002BC417 /* Main.storyboard */,
 				505ECA261C8822B2002BC417 /* Images.xcassets */,
 				505ECA281C8822B2002BC417 /* LaunchScreen.xib */,
@@ -238,8 +295,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				502BF9F41C898076004E8658 /* ImageStore.swift in Sources */,
+				50E51C781C892BFF00F77182 /* PostViewController.swift in Sources */,
 				505ECA421C882799002BC417 /* 9gagAPI.swift in Sources */,
 				505ECA441C882F7B002BC417 /* PostStore.swift in Sources */,
+				502BF9F21C896F2C004E8658 /* 9gagLayout.swift in Sources */,
 				505ECA4B1C8846D1002BC417 /* PostDataSource.swift in Sources */,
 				505ECA481C88371C002BC417 /* Optional+Unwrap.swift in Sources */,
 				50E51C761C89201300F77182 /* PostCollectionViewCell.swift in Sources */,

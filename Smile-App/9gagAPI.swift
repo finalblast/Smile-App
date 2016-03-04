@@ -34,35 +34,8 @@ struct _9gagAPI {
 
     private static func _9gagURL(#method: Method, parameter: [String: String]?) -> NSURL {
     
-        let components = NSURLComponents(string: baseURLString)!
-        var queryItems = [NSURLQueryItem]()
-        
-        let baseParams = [
-                            "method": method.rawValue,
-                            "format": "json"
-                        ]
-        
-        for (key, value) in baseParams {
-            
-            let item = NSURLQueryItem(name: key, value: value)
-            queryItems.append(item)
-            
-        }
-        
-        if let additionalParams = parameter {
-            
-            for (key, value) in additionalParams {
-                
-                let item = NSURLQueryItem(name: key, value: value)
-                queryItems.append(item)
-                
-            }
-            
-        }
-        
-        components.queryItems = queryItems
-        
-        return components.URL!
+        println("\(baseURLString)\(method.rawValue)")
+        return NSURL(string: "\(baseURLString)\(method.rawValue)")!
     
     }
     
@@ -81,6 +54,34 @@ struct _9gagAPI {
         } else {
             
             return _9gagURL(method: Method.Hot, parameter: nil)
+            
+        }
+        
+    }
+    
+    static func trendingPostsURLWithID(#id: String?) -> NSURL {
+        
+        if let paramId = id {
+            
+            return _9gagURL(method: Method.Trending, parameter: ["id": paramId])
+            
+        } else {
+            
+            return _9gagURL(method: Method.Trending, parameter: nil)
+            
+        }
+        
+    }
+    
+    static func freshPostsURLWithID(#id: String?) -> NSURL {
+        
+        if let paramId = id {
+            
+            return _9gagURL(method: Method.Fresh, parameter: ["id": paramId])
+            
+        } else {
+            
+            return _9gagURL(method: Method.Fresh, parameter: nil)
             
         }
         

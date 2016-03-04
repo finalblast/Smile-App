@@ -17,6 +17,8 @@ enum ImageResult {
 
 class PostStore {
     
+    var imageStore = ImageStore()
+    
     let session: NSURLSession = {
         
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -24,15 +26,35 @@ class PostStore {
         
         }()
     
-    func fetchHotPosts(#completion: (PostResult) -> Void) {
+    func fetchPosts(#method: Method, completion: (PostResult) -> Void) {
         
-        let url = _9gagAPI.hotPostsURLWithID(id: nil)
+        var url: NSURL!
+        
+        switch(method) {
+            
+        case Method.Hot:
+            
+            url = _9gagAPI.hotPostsURLWithID(id: nil)
+            
+        case Method.Trending:
+            
+            url = _9gagAPI.trendingPostsURLWithID(id: nil)
+            
+        case Method.Fresh:
+            
+            url = _9gagAPI.freshPostsURLWithID(id: nil)
+            
+        default:
+            
+            break
+            
+        }
         
         let request = NSURLRequest(URL: url)
         
         let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
             
-            let result = self.processHotPostsRequest(data: data, error: error)
+            let result = self.processPostsRequest(data: data, error: error)
             completion(result)
             
         })
@@ -41,7 +63,7 @@ class PostStore {
         
     }
     
-    func processHotPostsRequest(#data: NSData?, error: NSError?) -> PostResult {
+    func processPostsRequest(#data: NSData?, error: NSError?) -> PostResult {
         
         if let jsonData = data {
             
@@ -57,8 +79,10 @@ class PostStore {
     
     func fetchImageForPost(post: Post, completion: (ImageResult) -> Void) {
         
-        if let image = post.image {
+        let postId = post.id
+        if let image = imageStore.imageForKey(postId) {
             
+            post.image = image
             completion(ImageResult.Success(image))
             return
             
@@ -77,6 +101,7 @@ class PostStore {
             case let ImageResult.Success(image):
                 
                 post.image = image
+                self.imageStore.setImage(image, forKey: postId)
                 
             case let ImageResult.Failure(error):
                 

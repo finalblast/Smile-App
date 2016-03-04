@@ -17,7 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let mainViewController = self.window?.rootViewController as MainViewController
+        let navViewController = self.window?.rootViewController as UINavigationController
+        let mainViewController = navViewController.topViewController as MainViewController
         mainViewController.store = PostStore()
         
         return true

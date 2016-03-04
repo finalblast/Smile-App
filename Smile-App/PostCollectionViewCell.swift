@@ -10,26 +10,29 @@ import UIKit
 
 class PostCollecionViewCell: UICollectionViewCell {
     
+    @IBOutlet var captionLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var spinner: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         
         super.awakeFromNib()
-        updateWithImage(nil)
+        updateWithPost(nil)
         
     }
     
     override func prepareForReuse() {
         
         super.prepareForReuse()
-        updateWithImage(nil)
+        updateWithPost(nil)
         
     }
  
-    func updateWithImage(image: UIImage?) {
+    func updateWithPost(post: Post?) {
         
-        if let imageToDisplay = image {
+        captionLabel.text = post?.caption
+        
+        if let imageToDisplay = post?.image {
             
             spinner.stopAnimating()
             imageView.image = imageToDisplay

@@ -23,7 +23,7 @@ class PostDataSource: NSObject, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UICollectionViewCell", forIndexPath: indexPath) as PostCollecionViewCell
         
         let post = posts[indexPath.row]
-        cell.updateWithImage(post.image)
+        cell.updateWithPost(post)
         
         return cell
         
