@@ -29,15 +29,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         collectionView.dataSource = postDataSource
         collectionView.delegate = self
         
-        store.fetchPosts(method: Method.Fresh) { (postsResult) -> Void in
+        store.fetchPosts(method: Method.Hot) { (postsResult) -> Void in
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 
                 switch postsResult {
                     
                 case let PostResult.Success(posts):
                     
-                    println("Found \(posts.count)")
                     self.postDataSource.posts = posts
+                    println("Found \(posts.count)")
                     
                 case let PostResult.Failure(error):
                     
@@ -76,6 +76,26 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let post = postDataSource.posts[indexPath.row]
+        let postIndex = find(self.postDataSource.posts, post)!
+        let postIndexPath = NSIndexPath(forRow: postIndex, inSection: 0)
+        
+        if let cell = collectionView.cellForItemAtIndexPath(postIndexPath) as? PostCollecionViewCell {
+        
+            if let dicMediaURL = post.mediaLinks {
+                
+                let mediaURLString = dicMediaURL["mp4"] as String
+                let mediaURL = NSURL(string: mediaURLString)!
+                cell.playMedia(mediaURL)
+                
+            }
+        
+        }
+        
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "ShowPost" {
@@ -93,6 +113,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         
     }
     
+    
+    
 }
 
 extension MainViewController: _9gagLayoutDelegate {
@@ -104,11 +126,12 @@ extension MainViewController: _9gagLayoutDelegate {
         if let image = post.image {
 
             let rect  = AVMakeRectWithAspectRatioInsideRect(post.image!.size, boundingRect)
+            println(rect.size.height)
             return rect.size.height
             
         } else {
             
-            return CGFloat(0)
+            return CGFloat(320)
             
         }
     

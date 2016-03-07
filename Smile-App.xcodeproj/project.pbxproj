@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		502021071C8D87E900722470 /* MediaStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502021061C8D87E900722470 /* MediaStore.swift */; };
 		502BF9F21C896F2C004E8658 /* 9gagLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502BF9F11C896F2C004E8658 /* 9gagLayout.swift */; };
 		502BF9F41C898076004E8658 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502BF9F31C898076004E8658 /* ImageStore.swift */; };
 		505ECA201C8822B1002BC417 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA1F1C8822B1002BC417 /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		502021061C8D87E900722470 /* MediaStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaStore.swift; sourceTree = "<group>"; };
 		502BF9F11C896F2C004E8658 /* 9gagLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 9gagLayout.swift; sourceTree = "<group>"; };
 		502BF9F31C898076004E8658 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		505ECA1A1C8822B1002BC417 /* Smile-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smile-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,7 @@
 			children = (
 				502BF9F31C898076004E8658 /* ImageStore.swift */,
 				505ECA431C882F7B002BC417 /* PostStore.swift */,
+				502021061C8D87E900722470 /* MediaStore.swift */,
 			);
 			name = DataStores;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				502021071C8D87E900722470 /* MediaStore.swift in Sources */,
 				502BF9F41C898076004E8658 /* ImageStore.swift in Sources */,
 				50E51C781C892BFF00F77182 /* PostViewController.swift in Sources */,
 				505ECA421C882799002BC417 /* 9gagAPI.swift in Sources */,

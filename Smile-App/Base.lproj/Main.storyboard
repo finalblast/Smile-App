@@ -20,7 +20,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ivg-ID-VGA">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewLayout key="collectionViewLayout" id="AeC-eH-0fr" customClass="_9gagLayout" customModule="Smile_App" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="hHp-ye-CMe" customClass="_9gagLayout" customModule="Smile_App" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UICollectionViewCell" id="5an-ci-ZCY" customClass="PostCollecionViewCell" customModule="Smile_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -29,7 +29,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="xam-8k-Oca">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="xam-8k-Oca">
                                                     <rect key="frame" x="8" y="37" width="304" height="214"/>
                                                 </imageView>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="dCO-hV-Taz">
@@ -77,6 +77,15 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WI8-Bl-Og9">
+                                                    <rect key="frame" x="143" y="143" width="35" height="34"/>
+                                                    <state key="normal" title="Play">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="playMedia:" destination="5an-ci-ZCY" eventType="touchUpInside" id="ucE-zN-G1c"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -102,19 +111,21 @@
                                             <constraint firstItem="Enf-8n-7MX" firstAttribute="leading" secondItem="5an-ci-ZCY" secondAttribute="leadingMargin" id="c9K-vn-aF3"/>
                                             <constraint firstItem="40b-7o-PXT" firstAttribute="trailing" secondItem="5an-ci-ZCY" secondAttribute="trailingMargin" id="d2O-OG-Xb7"/>
                                             <constraint firstItem="yCv-48-uID" firstAttribute="width" secondItem="nHL-Qn-EGp" secondAttribute="width" id="dkS-IN-Fd4"/>
+                                            <constraint firstAttribute="centerY" secondItem="WI8-Bl-Og9" secondAttribute="centerY" id="fDg-Hu-rqi"/>
                                             <constraint firstItem="nHL-Qn-EGp" firstAttribute="leading" secondItem="EOF-k9-EPu" secondAttribute="trailing" constant="16" id="fzg-bJ-lbm"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="Enf-8n-7MX" secondAttribute="trailing" id="kKE-n1-y1g"/>
                                             <constraint firstItem="40b-7o-PXT" firstAttribute="bottom" secondItem="5an-ci-ZCY" secondAttribute="bottomMargin" id="mJi-Lv-1wE"/>
                                             <constraint firstItem="yCv-48-uID" firstAttribute="leading" secondItem="nHL-Qn-EGp" secondAttribute="trailing" constant="16" id="oCT-Lj-LxM"/>
                                             <constraint firstItem="EOF-k9-EPu" firstAttribute="top" secondItem="yaW-tp-sQk" secondAttribute="bottom" constant="5" id="ogk-F5-2vH"/>
+                                            <constraint firstAttribute="centerX" secondItem="WI8-Bl-Og9" secondAttribute="centerX" id="u9R-49-RmR"/>
                                             <constraint firstItem="FHW-kN-TPh" firstAttribute="width" secondItem="yaW-tp-sQk" secondAttribute="width" id="zmf-U6-8YL"/>
                                         </constraints>
                                         <size key="customSize" width="320" height="320"/>
                                         <connections>
                                             <outlet property="captionLabel" destination="Enf-8n-7MX" id="8gZ-vp-40w"/>
                                             <outlet property="imageView" destination="xam-8k-Oca" id="0CK-YM-AzA"/>
+                                            <outlet property="playButton" destination="WI8-Bl-Og9" id="cJ5-hv-WnX"/>
                                             <outlet property="spinner" destination="dCO-hV-Taz" id="N3z-jI-XZR"/>
-                                            <segue destination="SW3-Qp-E5g" kind="show" identifier="ShowPost" id="UBF-Nm-CUN"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

@@ -126,12 +126,20 @@ struct _9gagAPI {
         let postId = json["id"] as String
         let caption = json["caption"] as String
         let imageURLs = json["images"] as [String: AnyObject]
-//        let isMedia = json["media"] as Bool
         let link = json["link"] as String
         let postLink = NSURL(string: link)
-
-        return Post(id: postId, caption: caption, urls: imageURLs, link: postLink!)
         
+        if let isMedia = json["media"] as? Bool {
+
+            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: nil, link: postLink!)
+            
+        } else {
+            
+            let mediaLinks = json["media"] as [String: AnyObject]
+            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: mediaLinks, link: postLink!)
+            
+        }
+
     }
     
 }

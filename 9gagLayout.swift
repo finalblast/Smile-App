@@ -93,4 +93,10 @@ class _9gagLayout: UICollectionViewLayout {
         
     }
     
+    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+        
+        return true
+        
+    }
+    
 }

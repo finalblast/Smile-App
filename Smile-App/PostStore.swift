@@ -79,6 +79,8 @@ class PostStore {
     
     func fetchImageForPost(post: Post, completion: (ImageResult) -> Void) {
         
+//        var semaphore = dispatch_semaphore_create(0)
+        
         let postId = post.id
         if let image = imageStore.imageForKey(postId) {
             
@@ -109,11 +111,14 @@ class PostStore {
                 
             }
             
+//            dispatch_semaphore_signal(semaphore)
             completion(result)
             
         })
         
         task.resume()
+        
+//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         
     }
     

@@ -13,16 +13,16 @@ class Post {
     let id: String
     let caption: String
     let imageURLs: [String: AnyObject]
-//    let isMedia: Bool
+    let mediaLinks: [String: AnyObject]?
     let link: NSURL
     var image: UIImage?
     
-    init(id: String, caption: String, urls: [String: AnyObject], link: NSURL) {
+    init(id: String, caption: String, urls: [String: AnyObject], mediaLinks: [String: AnyObject]?, link: NSURL) {
         
         self.id = id
         self.caption = caption
         self.imageURLs = urls
-//        self.isMedia = isMedia
+        self.mediaLinks = mediaLinks
         self.link = link
         
     }
