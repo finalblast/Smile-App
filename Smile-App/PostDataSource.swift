@@ -11,6 +11,7 @@ import UIKit
 class PostDataSource: NSObject, UICollectionViewDataSource {
     
     var posts = [Post]()
+    var store: PostStore!
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -24,7 +25,37 @@ class PostDataSource: NSObject, UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UICollectionViewCell", forIndexPath: indexPath) as PostCollecionViewCell
         
-        cell.updateWithPost(post)
+        store.fetchImageForPost(post, completion: { (imageResult) -> Void in
+            
+            switch imageResult {
+                
+            case let ImageResult.Success(downloadedImage):
+                
+                post.image = downloadedImage
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    
+                        cell.updateWithPost(post)
+
+                })
+                
+            case let ImageResult.Failure(error):
+                
+                break
+                
+            }
+            
+        })
+
+        collectionView.reloadItemsAtIndexPaths([indexPath])
+        collectionView.performBatchUpdates({ () -> Void in
+            
+            collectionView.collectionViewLayout.invalidateLayout()
+            
+        }, completion: { (bool) -> Void in
+            
+            collectionView.collectionViewLayout.invalidateLayout()
+            
+        })
         
         return cell
         

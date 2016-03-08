@@ -101,7 +101,7 @@ class PostStore {
             switch(result) {
                 
             case let ImageResult.Success(image):
-                
+
                 post.image = image
                 self.imageStore.setImage(image, forKey: postId)
                 

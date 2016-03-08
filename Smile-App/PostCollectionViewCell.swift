@@ -39,12 +39,26 @@ class PostCollecionViewCell: UICollectionViewCell {
     
     func updateWithPost(post: Post?) {
         
+        playButton.hidden = true
+        
+        if let player = avPlayer {
+            
+            player.pause()
+            
+        }
+        
+        if let view = subView {
+            
+            view .removeFromSuperview()
+            
+        }
+
         if let currentPost = post {
             
             captionLabel.text = currentPost.caption
             
             if let imageToDisplay = currentPost.image {
-                
+
                 spinner.stopAnimating()
                 imageView.image = imageToDisplay
                 imageFrame = imageView.frame
@@ -54,20 +68,6 @@ class PostCollecionViewCell: UICollectionViewCell {
                     let mediaURLString = dicMediaURL["mp4"] as String
                     mediaURL = NSURL(string: mediaURLString)
                     playButton.hidden = false
-                    if subView != nil {
-                        
-                        subView .removeFromSuperview()
-                        
-                    }
-                    
-                } else {
-                    
-                    playButton.hidden = true
-                    if subView != nil {
-                        
-                        subView .removeFromSuperview()
-                        
-                    }
                     
                 }
                 
@@ -92,19 +92,13 @@ class PostCollecionViewCell: UICollectionViewCell {
         
         avPlayer = AVPlayer(URL: url)
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
+        if ((avPlayer.rate != 0) && (avPlayer.error == nil)) {
             
-            let downloadedData = NSData(contentsOfURL: url)
-            if (downloadedData != nil) {
-                
-                self.mediaStore.setMedia(downloadedData!, forKey: url.path!)
-                
-            }
+            // player is playing
+            stopPlaymedia(avPlayer)
+
+        } else {
             
-        })
-        
-        if (avPlayer.rate == 0.0) {
-            println("Play gif")
             let avPlayerLayer = AVPlayerLayer(player: avPlayer)
             avPlayerLayer.frame = CGRectMake(0, 0, imageFrame.size.width, imageFrame.size.height)
             subView = UIView(frame: imageFrame)
@@ -114,12 +108,32 @@ class PostCollecionViewCell: UICollectionViewCell {
             avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
             avPlayer.play()
             
-            avPlayer.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause;
+            avPlayer.actionAtItemEnd = AVPlayerActionAtItemEnd.None;
             
-        } else {
-            println("Pause gif")
-            playButton.hidden = false
-            avPlayer.pause()
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidReachEnd:", name: AVPlayerItemDidPlayToEndTimeNotification, object: avPlayer.currentItem)
+            
+        }
+        
+    }
+    
+    func playerDidReachEnd(notification: NSNotification) {
+    
+        let p = notification.object as AVPlayerItem
+        p.seekToTime(kCMTimeZero)
+    
+    }
+    
+    func stopPlaymedia(player: AVPlayer) {
+        
+        if ((player.rate != 0) && (player.error == nil)) {
+        
+            player.pause()
+        
+        }
+        
+        if (subView != nil) {
+            
+            subView .removeFromSuperview()
             
         }
         
