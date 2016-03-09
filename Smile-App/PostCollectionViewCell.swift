@@ -11,13 +11,29 @@ import UIKit
 
 class PostCollecionViewCell: UICollectionViewCell {
     
+    let numberFormatter: NSNumberFormatter = {
+        
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 1
+        return formatter
+        
+        }()
+    
     @IBOutlet var captionLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var playButton: UIButton!
     @IBOutlet var spinner: UIActivityIndicatorView!
     
+    @IBOutlet weak var votesLabel: UILabel!
+    @IBOutlet weak var commentsLabel: UILabel!
+    
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dislikeButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
+    
     var mediaURL: NSURL?
-    var imageFrame: CGRect!
     var subView: UIView!
     var avPlayer: AVPlayer!
     
@@ -43,30 +59,36 @@ class PostCollecionViewCell: UICollectionViewCell {
         
         if let player = avPlayer {
             
-            player.pause()
+            stopPlaymedia(player)
             
         }
         
-        if let view = subView {
+        if (subView != nil) {
             
-            view .removeFromSuperview()
+            subView .removeFromSuperview()
             
         }
 
         if let currentPost = post {
             
             captionLabel.text = currentPost.caption
+            let votesDic = currentPost.votes
+            let votesCount = votesDic["count"] as Int
+            votesLabel.text = "\(numberFormatter.stringFromNumber(votesCount)!) Votes"
+            let commentsDic = currentPost.comments
+            let commentsCount = commentsDic["count"] as Int
+            commentsLabel.text = "\(numberFormatter.stringFromNumber(commentsCount)!) Comments"
             
             if let imageToDisplay = currentPost.image {
 
                 spinner.stopAnimating()
                 imageView.image = imageToDisplay
-                imageFrame = imageView.frame
                 
                 if let dicMediaURL = currentPost.mediaLinks {
                     
                     let mediaURLString = dicMediaURL["mp4"] as String
                     mediaURL = NSURL(string: mediaURLString)
+                    avPlayer = AVPlayer(URL: mediaURL)
                     playButton.hidden = false
                     
                 }
@@ -88,10 +110,7 @@ class PostCollecionViewCell: UICollectionViewCell {
     }
     
     func playMedia(url: NSURL) {
-        
-        
-        avPlayer = AVPlayer(URL: url)
-        
+
         if ((avPlayer.rate != 0) && (avPlayer.error == nil)) {
             
             // player is playing
@@ -100,8 +119,8 @@ class PostCollecionViewCell: UICollectionViewCell {
         } else {
             
             let avPlayerLayer = AVPlayerLayer(player: avPlayer)
-            avPlayerLayer.frame = CGRectMake(0, 0, imageFrame.size.width, imageFrame.size.height)
-            subView = UIView(frame: imageFrame)
+            avPlayerLayer.frame = CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height)
+            subView = UIView(frame: imageView.frame)
             subView.layer .addSublayer(avPlayerLayer)
             contentView.addSubview(subView)
             
@@ -134,8 +153,25 @@ class PostCollecionViewCell: UICollectionViewCell {
         if (subView != nil) {
             
             subView .removeFromSuperview()
+            subView = nil
             
         }
+        
+    }
+    
+    @IBAction func likeClicked(sender: AnyObject) {
+        
+        
+    }
+    
+    @IBAction func dislikeClicked(sender: AnyObject) {
+        
+        
+    }
+    
+    @IBAction func commentClicked(sender: AnyObject) {
+        
+        
         
     }
     

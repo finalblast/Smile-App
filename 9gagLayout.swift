@@ -26,7 +26,6 @@ class _9gagLayout: UICollectionViewLayout {
     private var cache = [UICollectionViewLayoutAttributes]()
     
     private var contentHeight: CGFloat = 0
-    private var postHeight: CGFloat = 310
     private var contentWidth: CGFloat {
         
         let insets = collectionView!.contentInset
@@ -34,14 +33,8 @@ class _9gagLayout: UICollectionViewLayout {
         
     }
     
-    func calculateHeightWithImage(image: UIImage) {
-        
-        postHeight = image.size.height
-        
-    }
-    
     override func prepareLayout() {
-        
+
         if cache.isEmpty {
             
             let columnWidth = contentWidth / CGFloat(numberOfColumns)
@@ -50,7 +43,10 @@ class _9gagLayout: UICollectionViewLayout {
             for item in 0 ..< collectionView!.numberOfItemsInSection(0) {
                 
                 let indexPath = NSIndexPath(forItem: item, inSection: 0)
-                let annotationHeight = CGFloat(4) + CGFloat(17) + CGFloat(106) + CGFloat(4)
+                
+                let width = columnWidth - cellPadding * 2
+                let postHeight = delegate.collectionView(collectionView!, heightForPostAtIndexPath: indexPath, withWidth: width)
+                let annotationHeight = delegate.collectionView(collectionView!, heightForAnnotationAtIndexPath: indexPath, withWidth: width)
                 let height = cellPadding + postHeight + annotationHeight + cellPadding
                 let frame = CGRect(x: xOffset, y: yOffset, width: columnWidth, height: height)
                 let insetFrame = CGRectInset(frame, cellPadding, cellPadding)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F1112" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gwz-HU-Mht">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F1112" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LOR-1S-8bd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -18,8 +18,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ht-AE-0Er">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCV-Bg-Um2">
+                                        <rect key="frame" x="8" y="7" width="59" height="30"/>
+                                        <state key="normal" title="Hot">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hotClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MGI-D5-gC0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hy1-gQ-LIg">
+                                        <rect key="frame" x="75" y="7" width="59" height="30"/>
+                                        <state key="normal" title="Trending">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="trendingClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Qab-AL-73k"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCq-vx-TP9">
+                                        <rect key="frame" x="142" y="7" width="59" height="30"/>
+                                        <state key="normal" title="Fresh">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="freshClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7hM-7F-VxS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Hy1-gQ-LIg" firstAttribute="centerY" secondItem="PCq-vx-TP9" secondAttribute="centerY" id="1GC-eV-VUe"/>
+                                    <constraint firstAttribute="height" constant="44" id="9PE-9K-gWU"/>
+                                    <constraint firstItem="PCq-vx-TP9" firstAttribute="leading" secondItem="Hy1-gQ-LIg" secondAttribute="trailing" constant="8" id="F2E-pv-hOm"/>
+                                    <constraint firstItem="Hy1-gQ-LIg" firstAttribute="width" secondItem="GCV-Bg-Um2" secondAttribute="width" id="F7G-Qu-3sm"/>
+                                    <constraint firstItem="PCq-vx-TP9" firstAttribute="top" secondItem="3Ht-AE-0Er" secondAttribute="top" constant="7" id="N3h-pM-M68"/>
+                                    <constraint firstItem="GCV-Bg-Um2" firstAttribute="top" secondItem="3Ht-AE-0Er" secondAttribute="top" constant="7" id="NpL-Rj-1fc"/>
+                                    <constraint firstItem="Hy1-gQ-LIg" firstAttribute="centerY" secondItem="GCV-Bg-Um2" secondAttribute="centerY" id="SUO-aa-v1K"/>
+                                    <constraint firstItem="Hy1-gQ-LIg" firstAttribute="width" secondItem="PCq-vx-TP9" secondAttribute="width" id="W3h-uO-bR5"/>
+                                    <constraint firstItem="GCV-Bg-Um2" firstAttribute="leading" secondItem="3Ht-AE-0Er" secondAttribute="leading" constant="8" id="ngu-El-cQY"/>
+                                    <constraint firstItem="Hy1-gQ-LIg" firstAttribute="leading" secondItem="GCV-Bg-Um2" secondAttribute="trailing" constant="8" id="qX0-Wf-7b9"/>
+                                    <constraint firstItem="Hy1-gQ-LIg" firstAttribute="top" secondItem="3Ht-AE-0Er" secondAttribute="top" constant="7" id="tL2-5q-adA"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ivg-ID-VGA">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="112" width="600" height="439"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewLayout key="collectionViewLayout" id="hHp-ye-CMe" customClass="_9gagLayout" customModule="Smile_App" customModuleProvider="target"/>
                                 <cells>
@@ -59,12 +105,18 @@
                                                     <state key="normal" title="Dislike">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="dislikeClicked:" destination="5an-ci-ZCY" eventType="touchUpInside" id="1aT-4K-9K6"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCv-48-uID">
                                                     <rect key="frame" x="176" y="282" width="68" height="30"/>
                                                     <state key="normal" title="Comment">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="commentClicked:" destination="5an-ci-ZCY" eventType="touchUpInside" id="shA-vS-GlA"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40b-7o-PXT">
                                                     <rect key="frame" x="272" y="282" width="40" height="30"/>
@@ -77,6 +129,9 @@
                                                     <state key="normal" title="Like">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="likeClicked:" destination="5an-ci-ZCY" eventType="touchUpInside" id="ma4-lI-il1"/>
+                                                    </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WI8-Bl-Og9">
                                                     <rect key="frame" x="143" y="143" width="35" height="34"/>
@@ -124,9 +179,14 @@
                                         <size key="customSize" width="320" height="320"/>
                                         <connections>
                                             <outlet property="captionLabel" destination="Enf-8n-7MX" id="8gZ-vp-40w"/>
+                                            <outlet property="commentButton" destination="yCv-48-uID" id="3VT-Mo-ybD"/>
+                                            <outlet property="commentsLabel" destination="FHW-kN-TPh" id="EVs-7T-vg0"/>
+                                            <outlet property="dislikeButton" destination="nHL-Qn-EGp" id="9HT-5z-F5G"/>
                                             <outlet property="imageView" destination="xam-8k-Oca" id="0CK-YM-AzA"/>
+                                            <outlet property="likeButton" destination="EOF-k9-EPu" id="gzE-wr-fBP"/>
                                             <outlet property="playButton" destination="WI8-Bl-Og9" id="cJ5-hv-WnX"/>
                                             <outlet property="spinner" destination="dCO-hV-Taz" id="N3z-jI-XZR"/>
+                                            <outlet property="votesLabel" destination="yaW-tp-sQk" id="fnZ-Q1-8AN"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -134,20 +194,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Ivg-ID-VGA" secondAttribute="bottom" id="Mc3-Dt-sx2"/>
-                            <constraint firstItem="Ivg-ID-VGA" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="k8s-u0-GKW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Ht-AE-0Er" secondAttribute="trailing" constant="-16" id="L4d-gI-k3O"/>
+                            <constraint firstItem="Ivg-ID-VGA" firstAttribute="top" secondItem="3Ht-AE-0Er" secondAttribute="bottom" constant="4" id="dWy-Pd-Ig3"/>
+                            <constraint firstItem="3Ht-AE-0Er" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="ek2-sF-odb"/>
                             <constraint firstItem="Ivg-ID-VGA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="qPS-Ws-Q8x"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ivg-ID-VGA" secondAttribute="trailing" constant="-16" id="rsi-zC-poD"/>
+                            <constraint firstItem="3Ht-AE-0Er" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="sMV-Z8-Nyl"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Ivg-ID-VGA" secondAttribute="bottom" id="sX4-Ik-03t"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Smile-App" id="7wN-vs-ZSO"/>
                     <connections>
                         <outlet property="collectionView" destination="Ivg-ID-VGA" id="Cdi-1I-NOl"/>
+                        <outlet property="freshButton" destination="PCq-vx-TP9" id="KtM-Gj-z6f"/>
+                        <outlet property="hotButton" destination="GCV-Bg-Um2" id="5em-yj-PSb"/>
+                        <outlet property="trendingButton" destination="Hy1-gQ-LIg" id="3kl-PN-qfn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="916" y="137"/>
+            <point key="canvasLocation" x="3352" y="137"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="dzF-EK-1uJ">
@@ -179,25 +245,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hir-zc-GyD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1670" y="137"/>
+            <point key="canvasLocation" x="4106" y="137"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="lLA-Gf-iEI">
+        <scene sceneID="oIM-qh-pzJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gwz-HU-Mht" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5dS-u6-9Hx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="aye-ei-W9z"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dla-Uu-pMf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sdt-AW-m71">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="coD-tk-DZX"/>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="bhU-ks-9Bc"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1KK-gX-Obx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gFd-hG-7rT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="238" y="137"/>
+            <point key="canvasLocation" x="2540" y="137"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Qtj-bc-Jis">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="LOR-1S-8bd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="KDL-2l-AAw">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="5dS-u6-9Hx" kind="relationship" relationship="viewControllers" id="1SJ-Y8-35s"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LJ6-GT-pj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1728" y="137"/>
         </scene>
     </scenes>
 </document>

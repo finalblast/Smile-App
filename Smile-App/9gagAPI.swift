@@ -26,6 +26,13 @@ enum PostResult {
     
 }
 
+enum PagingNext {
+    
+    case Success(String)
+    case Failure(NSError)
+    
+}
+
 struct _9gagAPI {
     
     private static let baseURLString = "http://infinigag.k3min.eu/"
@@ -34,7 +41,13 @@ struct _9gagAPI {
 
     private static func _9gagURL(#method: Method, parameter: [String: String]?) -> NSURL {
     
-        println("\(baseURLString)\(method.rawValue)")
+        var id: String!
+        if let param = parameter {
+            
+            id = param["id"]
+            
+        }
+        println("\(baseURLString)\(method.rawValue)/\(id)")
         return NSURL(string: "\(baseURLString)\(method.rawValue)")!
     
     }
@@ -87,6 +100,26 @@ struct _9gagAPI {
         
     }
     
+    static func pagingFromJSONData(#data: NSData) -> PagingNext {
+        
+        var error: NSError?
+        let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
+        if let actualError = error {
+            
+            return PagingNext.Failure(actualError)
+            
+        } else {
+            
+            let jsonDic = jsonObject as [NSObject: AnyObject]
+            let paging = jsonDic["paging"] as [String: AnyObject]
+            let pagingNext = paging["next"] as String
+            
+            return PagingNext.Success(pagingNext)
+            
+        }
+        
+    }
+    
     static func postsFromJSONData(#data: NSData) -> PostResult {
         
         var error: NSError?
@@ -128,15 +161,17 @@ struct _9gagAPI {
         let imageURLs = json["images"] as [String: AnyObject]
         let link = json["link"] as String
         let postLink = NSURL(string: link)
+        let votes = json["votes"] as [String: AnyObject]
+        let comments = json["comments"] as [String: AnyObject]
         
         if let isMedia = json["media"] as? Bool {
 
-            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: nil, link: postLink!)
+            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: nil, link: postLink!, votes: votes, comments: comments)
             
         } else {
             
             let mediaLinks = json["media"] as [String: AnyObject]
-            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: mediaLinks, link: postLink!)
+            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: mediaLinks, link: postLink!, votes: votes, comments: comments)
             
         }
 

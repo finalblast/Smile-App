@@ -26,7 +26,7 @@ class PostStore {
         
         }()
     
-    func fetchPosts(#method: Method, completion: (PostResult) -> Void) {
+    func fetchPosts(#method: Method, id: String,completion: (PostResult) -> Void) {
         
         var url: NSURL!
         
@@ -34,15 +34,15 @@ class PostStore {
             
         case Method.Hot:
             
-            url = _9gagAPI.hotPostsURLWithID(id: nil)
+            url = _9gagAPI.hotPostsURLWithID(id: id)
             
         case Method.Trending:
             
-            url = _9gagAPI.trendingPostsURLWithID(id: nil)
+            url = _9gagAPI.trendingPostsURLWithID(id: id)
             
         case Method.Fresh:
             
-            url = _9gagAPI.freshPostsURLWithID(id: nil)
+            url = _9gagAPI.freshPostsURLWithID(id: id)
             
         default:
             
@@ -79,7 +79,7 @@ class PostStore {
     
     func fetchImageForPost(post: Post, completion: (ImageResult) -> Void) {
         
-//        var semaphore = dispatch_semaphore_create(0)
+        var semaphore = dispatch_semaphore_create(0)
         
         let postId = post.id
         if let image = imageStore.imageForKey(postId) {
@@ -111,14 +111,14 @@ class PostStore {
                 
             }
             
-//            dispatch_semaphore_signal(semaphore)
+            dispatch_semaphore_signal(semaphore)
             completion(result)
             
         })
         
         task.resume()
         
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         
     }
     
