@@ -9,8 +9,8 @@
 import UIKit
 
 class PostViewController: UIViewController {
-    
-    @IBOutlet weak var imageView: UIImageView!
+
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var post: Post! {
         
@@ -34,8 +34,20 @@ class PostViewController: UIViewController {
             case let ImageResult.Success(image):
                 
                 NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+
+                    let imageRatio = image.size.height / image.size.width;
                     
-                    self.imageView.image = image
+                    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) * imageRatio)
+                    self.scrollView.scrollEnabled = true
+                    self.scrollView.layer.borderWidth = 1.0
+                    self.scrollView.layer.borderColor = UIColor.blackColor().CGColor
+                    
+                    
+                    let imageView = UIImageView()
+                    imageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) * imageRatio)
+                    imageView.layer.borderWidth = 1.0
+                    imageView.layer.borderColor = UIColor.redColor().CGColor
+                    self.scrollView.addSubview(imageView)
                     
                 })
                 
@@ -44,6 +56,16 @@ class PostViewController: UIViewController {
                 println(error)
                 
             }
+            
+        })
+        
+    }
+    
+    @IBAction func closeClicked(sender: AnyObject) {
+        
+        presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+            
             
         })
         

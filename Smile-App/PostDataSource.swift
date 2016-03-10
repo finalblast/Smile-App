@@ -14,8 +14,7 @@ class PostDataSource: NSObject, UICollectionViewDataSource {
     var store: PostStore!
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        println(posts.count)
+
         return posts.count
         
     }

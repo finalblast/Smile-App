@@ -26,7 +26,7 @@ class PostStore {
         
         }()
     
-    func fetchPosts(#method: Method, id: String,completion: (PostResult) -> Void) {
+    func fetchPosts(#method: Method, nextPaging: Bool,completion: (PostResult) -> Void) {
         
         var url: NSURL!
         
@@ -34,15 +34,15 @@ class PostStore {
             
         case Method.Hot:
             
-            url = _9gagAPI.hotPostsURLWithID(id: id)
+            url = _9gagAPI.hotPostsURLWithID(nextPaging: nextPaging)
             
         case Method.Trending:
             
-            url = _9gagAPI.trendingPostsURLWithID(id: id)
+            url = _9gagAPI.trendingPostsURLWithID(nextPaging: nextPaging)
             
         case Method.Fresh:
             
-            url = _9gagAPI.freshPostsURLWithID(id: id)
+            url = _9gagAPI.freshPostsURLWithID(nextPaging: nextPaging)
             
         default:
             

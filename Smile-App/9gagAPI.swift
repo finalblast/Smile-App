@@ -39,15 +39,18 @@ struct _9gagAPI {
     
     static var apiToken: String!
 
-    private static func _9gagURL(#method: Method, parameter: [String: String]?) -> NSURL {
+    private static var nextPagingID: NSString?
     
-        var id: String!
+    private static func _9gagURL(#method: Method, parameter: [String: String]?) -> NSURL {
+
         if let param = parameter {
             
-            id = param["id"]
+            let id = param["id"]!
+            println("\(baseURLString)\(method.rawValue)/\(id)")
+            return NSURL(string: "\(baseURLString)\(method.rawValue)/\(id)")!
             
         }
-        println("\(baseURLString)\(method.rawValue)/\(id)")
+        println("\(baseURLString)\(method.rawValue)")
         return NSURL(string: "\(baseURLString)\(method.rawValue)")!
     
     }
@@ -58,11 +61,13 @@ struct _9gagAPI {
         
     }
     
-    static func hotPostsURLWithID(#id: String?) -> NSURL {
+    static func hotPostsURLWithID(#nextPaging: Bool?) -> NSURL {
         
-        if let paramId = id {
+        println(nextPaging)
+        
+        if nextPaging! {
             
-            return _9gagURL(method: Method.Hot, parameter: ["id": paramId])
+            return _9gagURL(method: Method.Hot, parameter: ["id": nextPagingID!])
             
         } else {
             
@@ -72,11 +77,11 @@ struct _9gagAPI {
         
     }
     
-    static func trendingPostsURLWithID(#id: String?) -> NSURL {
+    static func trendingPostsURLWithID(#nextPaging: Bool?) -> NSURL {
         
-        if let paramId = id {
+        if nextPaging! {
             
-            return _9gagURL(method: Method.Trending, parameter: ["id": paramId])
+            return _9gagURL(method: Method.Trending, parameter: ["id": nextPagingID!])
             
         } else {
             
@@ -86,11 +91,11 @@ struct _9gagAPI {
         
     }
     
-    static func freshPostsURLWithID(#id: String?) -> NSURL {
+    static func freshPostsURLWithID(#nextPaging: Bool?) -> NSURL {
         
-        if let paramId = id {
+        if nextPaging! {
             
-            return _9gagURL(method: Method.Fresh, parameter: ["id": paramId])
+            return _9gagURL(method: Method.Fresh, parameter: ["id": nextPagingID!])
             
         } else {
             
@@ -100,13 +105,13 @@ struct _9gagAPI {
         
     }
     
-    static func pagingFromJSONData(#data: NSData) -> PagingNext {
+    static func pagingFromJSONData(#data: NSData) -> String {
         
         var error: NSError?
         let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
         if let actualError = error {
             
-            return PagingNext.Failure(actualError)
+            return ""
             
         } else {
             
@@ -114,7 +119,7 @@ struct _9gagAPI {
             let paging = jsonDic["paging"] as [String: AnyObject]
             let pagingNext = paging["next"] as String
             
-            return PagingNext.Success(pagingNext)
+            return pagingNext
             
         }
         
@@ -132,6 +137,8 @@ struct _9gagAPI {
             
             let jsonDic = jsonObject as [NSObject: AnyObject]
             let postsArray = jsonDic["data"] as [[String: AnyObject]]
+            let paging = jsonDic["paging"] as [String: AnyObject]
+            nextPagingID = paging["next"] as String
             
             var finalPosts = [Post]()
             for postJSON in postsArray {

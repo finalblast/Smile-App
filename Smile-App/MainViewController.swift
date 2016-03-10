@@ -19,6 +19,70 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     var store: PostStore!
     var postDataSource = PostDataSource()
     
+    var nextPaging: Bool!
+    
+    var methodName: Method = Method.Hot {
+        
+        didSet {
+
+            fetchPosts()
+            
+        }
+        
+    }
+    
+    func fetchPosts() {
+        
+        store.fetchPosts(method: methodName, nextPaging: nextPaging) { (postsResult) -> Void in
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                
+                self.hotButton.titleLabel?.textColor = UIColor.redColor()
+                self.trendingButton.titleLabel?.textColor = UIColor.blueColor()
+                self.freshButton.titleLabel?.textColor = UIColor.blueColor()
+                
+                switch postsResult {
+                    
+                case let PostResult.Success(posts):
+                    
+                    for post in posts {
+                        
+                        self.store.fetchImageForPost(post, completion: { (imageResult) -> Void in
+
+                            
+                            
+                        })
+                    
+                    }
+                    
+                    if self.nextPaging! {
+                        
+                        self.postDataSource.posts.extend(posts)
+                        
+                    } else {
+                        
+                        self.postDataSource.posts = posts
+                        self.collectionView.setContentOffset(CGPointZero, animated: true)
+                        
+                    }
+
+                    self.postDataSource.store = self.store
+                    
+                case let PostResult.Failure(error):
+                    
+                    println("Error: \(error)")
+                    self.postDataSource.posts.removeAll()
+                    
+                }
+                self.collectionView.reloadData()
+                self.isLoadingMore = false
+                println(self.postDataSource.posts.count)
+                
+            })
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -31,66 +95,14 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         
         collectionView.dataSource = postDataSource
         collectionView.delegate = self
-        
-        store.fetchPosts(method: Method.Hot, id: "") { (postsResult) -> Void in
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                
-                switch postsResult {
-                    
-                case let PostResult.Success(posts):
-                    
-                    for post in posts {
-                        
-                        self.store.fetchImageForPost(post, completion: { (imageResult) -> Void in
-                            
-                            
-                        })
-                        
-                    }
-                    
-                    self.postDataSource.posts = posts
-                    self.postDataSource.store = self.store
-                    
-                case let PostResult.Failure(error):
-                    
-                    println("Error: \(error)")
-                    self.postDataSource.posts.removeAll()
-                    
-                }
-                
-                self.collectionView.reloadData()
-                
-            })
-            
-        }
-        
-    }
-    
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        
-        let post = postDataSource.posts[indexPath.row]
-        let postIndex = find(self.postDataSource.posts, post)!
-        let postIndexPath = NSIndexPath(forRow: postIndex, inSection: 0)
-        
-        if let cell = collectionView.cellForItemAtIndexPath(postIndexPath) as? PostCollecionViewCell {
-            
-            if let player = cell.avPlayer {
-                
-                cell.stopPlaymedia(player)
-                
-            }
-            
-        }
+        nextPaging = false
+        methodName = Method.Hot
         
     }
     
     func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
-        let post = postDataSource.posts[indexPath.row]
-        let postIndex = find(self.postDataSource.posts, post)!
-        let postIndexPath = NSIndexPath(forRow: postIndex, inSection: 0)
-        
-        if let cell = collectionView.cellForItemAtIndexPath(postIndexPath) as? PostCollecionViewCell {
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? PostCollecionViewCell {
             
             if let player = cell.avPlayer {
                 
@@ -129,7 +141,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
             if let selectedIndexPath = collectionView.indexPathsForSelectedItems()?.first as? NSIndexPath {
                 
                 let post = postDataSource.posts[selectedIndexPath.row]
-                let destinationVC = segue.destinationViewController as PostViewController
+                let navController = segue.destinationViewController as UINavigationController
+                let destinationVC = navController.topViewController as PostViewController
                 destinationVC.post = post
                 destinationVC.store = store
                 
@@ -143,7 +156,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
 
     var isLoadingMore = false
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset
         let bounds = scrollView.bounds
@@ -152,42 +165,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         let y = offset.y + bounds.size.height - inset.bottom
         let h = size.height
         
-        let reload_distance = CGFloat(10)
-        if !isLoadingMore && (y > h + reload_distance) {
+        let min_reload_distance = CGFloat(-100)
+        let max_reload_distance = CGFloat(1000)
+        if !isLoadingMore && (h + min_reload_distance < y  || y > h + max_reload_distance) {
             
             println("load more rows")
             isLoadingMore = true
             
-            self.store.fetchPosts(method: Method.Hot, id: "next") { (postsResult) -> Void in
-                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                    
-                    switch postsResult {
-                        
-                    case let PostResult.Success(posts):
-                        
-                        for post in posts {
-                            
-                            self.store.fetchImageForPost(post, completion: { (imageResult) -> Void in
-                                
-                                self.postDataSource.posts.append(post)
-                                
-                            })
-                            
-                        }
-                        
-                        self.postDataSource.store = self.store
-                        
-                    case let PostResult.Failure(error):
-                        
-                        println("Error: \(error)")
-                        self.postDataSource.posts.removeAll()
-                        
-                    }
-                    
-                    self.isLoadingMore = false
-                    
-                })
-            }
+            nextPaging = true
+            fetchPosts()
             
         }
         
@@ -197,19 +183,22 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     
     @IBAction func hotClicked(sender: AnyObject) {
         
-        
+        nextPaging = false
+        methodName = Method.Hot
         
     }
     
     @IBAction func trendingClicked(sender: AnyObject) {
-        
-        
+
+        nextPaging = false
+        methodName = Method.Trending
         
     }
     
     @IBAction func freshClicked(sender: AnyObject) {
         
-        
+        nextPaging = false
+        methodName = Method.Fresh
         
     }
     
