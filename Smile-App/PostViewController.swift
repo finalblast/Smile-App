@@ -22,12 +22,20 @@ class PostViewController: UIViewController {
         
     }
     
-    var store: PostStore!
+    var postStore: PostStore!
+    var tokenStore: TokenStore!
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        println(AppDelegate.sharedInstance.access_token)
+        
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        store.fetchImageForPost(post, completion: { (imageResult) -> Void in
+        postStore.fetchImageForPost(post, completion: { (imageResult) -> Void in
             
             switch(imageResult) {
                 
@@ -39,14 +47,9 @@ class PostViewController: UIViewController {
                     
                     self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) * imageRatio)
                     self.scrollView.scrollEnabled = true
-                    self.scrollView.layer.borderWidth = 1.0
-                    self.scrollView.layer.borderColor = UIColor.blackColor().CGColor
                     
-                    
-                    let imageView = UIImageView()
-                    imageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) * imageRatio)
-                    imageView.layer.borderWidth = 1.0
-                    imageView.layer.borderColor = UIColor.redColor().CGColor
+                    let imageView = UIImageView(image: image)
+                    imageView.frame = CGRectMake(8, -64, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) * imageRatio + 64)
                     self.scrollView.addSubview(imageView)
                     
                 })
@@ -68,6 +71,64 @@ class PostViewController: UIViewController {
             
             
         })
+        
+    }
+    
+    @IBAction func likeClicked(sender: AnyObject) {
+        
+        if AppDelegate.sharedInstance.isLogged {
+
+            postStore.voteForPost(post, type: "like", completion: { (voteResult) -> Void in
+                
+                println(voteResult)
+                
+            })
+            
+        } else {
+            
+            presentingLogInViewController()
+            
+        }
+        
+    }
+    
+    @IBAction func dislikeClicked(sender: AnyObject) {
+        
+        if AppDelegate().isLogged {
+            
+//            store.voteForPost(post)
+            
+        } else {
+            
+            presentingLogInViewController()
+            
+        }
+        
+    }
+    
+    @IBAction func commentsClicked(sender: AnyObject) {
+        
+        if AppDelegate().isLogged {
+            
+//            store.voteForPost(post)
+            
+        } else {
+            
+            presentingLogInViewController()
+            
+        }
+        
+    }
+    
+    func presentingLogInViewController() {
+        
+        let logInViewController = storyboard?.instantiateViewControllerWithIdentifier("LogInViewController") as LogInViewController
+        logInViewController.tokenStore = tokenStore
+        presentViewController(logInViewController, animated: true) { () -> Void in
+            
+            
+            
+        }
         
     }
     

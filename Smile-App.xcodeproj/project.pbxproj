@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5010A0591C927B9400E3EA0D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5010A0581C927B9400E3EA0D /* LogInViewController.swift */; };
+		5010A05B1C927E0E00E3EA0D /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5010A05A1C927E0E00E3EA0D /* TokenStore.swift */; };
 		502021071C8D87E900722470 /* MediaStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502021061C8D87E900722470 /* MediaStore.swift */; };
 		502BF9F21C896F2C004E8658 /* 9gagLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502BF9F11C896F2C004E8658 /* 9gagLayout.swift */; };
 		502BF9F41C898076004E8658 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502BF9F31C898076004E8658 /* ImageStore.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5010A0581C927B9400E3EA0D /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		5010A05A1C927E0E00E3EA0D /* TokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStore.swift; sourceTree = "<group>"; };
 		502021061C8D87E900722470 /* MediaStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaStore.swift; sourceTree = "<group>"; };
 		502BF9F11C896F2C004E8658 /* 9gagLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 9gagLayout.swift; sourceTree = "<group>"; };
 		502BF9F31C898076004E8658 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 				502BF9F31C898076004E8658 /* ImageStore.swift */,
 				505ECA431C882F7B002BC417 /* PostStore.swift */,
 				502021061C8D87E900722470 /* MediaStore.swift */,
+				5010A05A1C927E0E00E3EA0D /* TokenStore.swift */,
 			);
 			name = DataStores;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 				505ECA1F1C8822B1002BC417 /* AppDelegate.swift */,
 				505ECA3F1C88270F002BC417 /* MainViewController.swift */,
 				50E51C771C892BFF00F77182 /* PostViewController.swift */,
+				5010A0581C927B9400E3EA0D /* LogInViewController.swift */,
 				505ECA231C8822B2002BC417 /* Main.storyboard */,
 				505ECA261C8822B2002BC417 /* Images.xcassets */,
 				505ECA281C8822B2002BC417 /* LaunchScreen.xib */,
@@ -299,11 +305,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				502021071C8D87E900722470 /* MediaStore.swift in Sources */,
+				5010A05B1C927E0E00E3EA0D /* TokenStore.swift in Sources */,
 				502BF9F41C898076004E8658 /* ImageStore.swift in Sources */,
 				50E51C781C892BFF00F77182 /* PostViewController.swift in Sources */,
 				505ECA421C882799002BC417 /* 9gagAPI.swift in Sources */,
 				505ECA441C882F7B002BC417 /* PostStore.swift in Sources */,
 				502BF9F21C896F2C004E8658 /* 9gagLayout.swift in Sources */,
+				5010A0591C927B9400E3EA0D /* LogInViewController.swift in Sources */,
 				505ECA4B1C8846D1002BC417 /* PostDataSource.swift in Sources */,
 				505ECA481C88371C002BC417 /* Optional+Unwrap.swift in Sources */,
 				50E51C761C89201300F77182 /* PostCollectionViewCell.swift in Sources */,

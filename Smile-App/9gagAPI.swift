@@ -11,11 +11,12 @@ import UIKit
 // MARK: Enums
 
 enum Method: String {
-    
+ 
     case Token = "token"
     case Hot = "hot"
     case Trending = "trending"
     case Fresh = "fresh"
+    case Vote = "vote"
     
 }
 
@@ -26,9 +27,23 @@ enum PostResult {
     
 }
 
-enum PagingNext {
+enum ImageResult {
+    
+    case Success(UIImage)
+    case Failure(NSError)
+    
+}
+
+enum TokenResult {
     
     case Success(String)
+    case Failure(NSError)
+    
+}
+
+enum VoteResult {
+    
+    case Success([NSObject : AnyObject])
     case Failure(NSError)
     
 }
@@ -36,28 +51,40 @@ enum PagingNext {
 struct _9gagAPI {
     
     private static let baseURLString = "http://infinigag.k3min.eu/"
-    
-    static var apiToken: String!
 
     private static var nextPagingID: NSString?
     
-    private static func _9gagURL(#method: Method, parameter: [String: String]?) -> NSURL {
+    private static func _9gagURL(#method: Method, parameter: [String: String]?, isVote: Bool) -> NSURL {
 
         if let param = parameter {
             
+            if isVote {
+                
+                let type = param["type"]!
+                let id = param["id"]!
+                let access_token = AppDelegate().access_token
+                return NSURL(string: "\(baseURLString)\(method.rawValue)/\(type)/\(id)?\(access_token)")!
+                
+            }
+            
             let id = param["id"]!
-            println("\(baseURLString)\(method.rawValue)/\(id)")
             return NSURL(string: "\(baseURLString)\(method.rawValue)/\(id)")!
             
         }
-        println("\(baseURLString)\(method.rawValue)")
+        
         return NSURL(string: "\(baseURLString)\(method.rawValue)")!
     
     }
     
     static func getToken() -> NSURL {
         
-        return _9gagURL(method: Method.Token, parameter: nil)
+        return _9gagURL(method: Method.Token, parameter: nil, isVote: false)
+        
+    }
+    
+    static func voteForPost(#type: String, id: String) -> NSURL {
+        
+        return _9gagURL(method: Method.Vote, parameter: ["type" : type, "id" : id], isVote: false)
         
     }
     
@@ -67,11 +94,11 @@ struct _9gagAPI {
         
         if nextPaging! {
             
-            return _9gagURL(method: Method.Hot, parameter: ["id": nextPagingID!])
+            return _9gagURL(method: Method.Hot, parameter: ["id": nextPagingID!], isVote: false)
             
         } else {
             
-            return _9gagURL(method: Method.Hot, parameter: nil)
+            return _9gagURL(method: Method.Hot, parameter: nil, isVote: false)
             
         }
         
@@ -81,11 +108,11 @@ struct _9gagAPI {
         
         if nextPaging! {
             
-            return _9gagURL(method: Method.Trending, parameter: ["id": nextPagingID!])
+            return _9gagURL(method: Method.Trending, parameter: ["id": nextPagingID!], isVote: false)
             
         } else {
             
-            return _9gagURL(method: Method.Trending, parameter: nil)
+            return _9gagURL(method: Method.Trending, parameter: nil, isVote: false)
             
         }
         
@@ -95,23 +122,78 @@ struct _9gagAPI {
         
         if nextPaging! {
             
-            return _9gagURL(method: Method.Fresh, parameter: ["id": nextPagingID!])
+            return _9gagURL(method: Method.Fresh, parameter: ["id": nextPagingID!], isVote: false)
             
         } else {
             
-            return _9gagURL(method: Method.Fresh, parameter: nil)
+            return _9gagURL(method: Method.Fresh, parameter: nil, isVote: false)
             
         }
         
     }
     
-    static func pagingFromJSONData(#data: NSData) -> String {
+    static func tokenFromJSONData(#data: NSData) -> TokenResult {
+        
+        var error: NSError?
+        let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
+        
+        if let actualError = error {
+            
+            return TokenResult.Failure(actualError)
+            
+        } else {
+
+            let jsonDic = jsonObject as [NSObject: AnyObject]
+            let token = jsonDic["access_token"] as String?
+            
+            if let userToken = token {
+                
+                return TokenResult.Success(userToken)
+                
+            } else {
+             
+                return TokenResult.Failure(NSError(domain: "Unauthorized", code: 401, userInfo:nil))
+                
+            }
+            
+        }
+        
+    }
+    
+    static func voteResponseFromData(#data: NSData) -> VoteResult {
+        
+        var error: NSError?
+        let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
+        
+        if let actualError = error {
+            
+            return VoteResult.Failure(actualError)
+            
+        } else {
+
+            let jsonDic = jsonObject as [NSObject: AnyObject]?
+            
+            if let dic = jsonDic {
+                
+                return VoteResult.Success(dic)
+                
+            } else {
+                
+                return VoteResult.Failure(NSError(domain: "Unauthorized", code: 401, userInfo:nil))
+                
+            }
+            
+        }
+        
+    }
+    
+    static func pagingFromJSONData(#data: NSData) -> String? {
         
         var error: NSError?
         let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
         if let actualError = error {
             
-            return ""
+            return nil
             
         } else {
             

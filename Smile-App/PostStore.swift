@@ -8,13 +8,6 @@
 
 import UIKit
 
-enum ImageResult {
-    
-    case Success(UIImage)
-    case Failure(NSError)
-    
-}
-
 class PostStore {
     
     var imageStore = ImageStore()
@@ -63,7 +56,7 @@ class PostStore {
         
     }
     
-    func processPostsRequest(#data: NSData?, error: NSError?) -> PostResult {
+    private func processPostsRequest(#data: NSData?, error: NSError?) -> PostResult {
         
         if let jsonData = data {
             
@@ -122,7 +115,7 @@ class PostStore {
         
     }
     
-    func processImageRequest(#data: NSData?, error: NSError?) -> ImageResult {
+    private func processImageRequest(#data: NSData?, error: NSError?) -> ImageResult {
         
         if let imageData = data {
             
@@ -139,6 +132,37 @@ class PostStore {
         } else {
             
             return ImageResult.Failure(error!)
+            
+        }
+        
+    }
+    
+    func voteForPost(post: Post, type: String, completion: (VoteResult) -> Void) {
+        
+        let url = _9gagAPI.voteForPost(type: type, id: post.id)
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            
+            let result = self.processVoteRequest(data: data, error: error)
+            completion(result)
+            
+        })
+        
+        task.resume()
+        
+    }
+    
+    private func processVoteRequest(#data: NSData?, error: NSError?) -> VoteResult {
+        
+        if let jsonData = data {
+            
+            return _9gagAPI.voteResponseFromData(data: jsonData)
+            
+        } else {
+            
+            return VoteResult.Failure(error!)
             
         }
         

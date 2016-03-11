@@ -16,12 +16,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var trendingButton: UIButton!
     @IBOutlet weak var freshButton: UIButton!
     
-    var store: PostStore!
+    var postStore: PostStore!
+    var tokenStore: TokenStore!
     var postDataSource = PostDataSource()
     
     var nextPaging: Bool!
     
-    var methodName: Method = Method.Hot {
+    var methodName: Method! {
         
         didSet {
 
@@ -33,12 +34,16 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     
     func fetchPosts() {
         
-        store.fetchPosts(method: methodName, nextPaging: nextPaging) { (postsResult) -> Void in
+        postStore.fetchPosts(method: methodName, nextPaging: nextPaging) { (postsResult) -> Void in
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 
-                self.hotButton.titleLabel?.textColor = UIColor.redColor()
+                println(self.methodName.hashValue)
+                self.hotButton.titleLabel?.textColor = UIColor.blueColor()
                 self.trendingButton.titleLabel?.textColor = UIColor.blueColor()
                 self.freshButton.titleLabel?.textColor = UIColor.blueColor()
+                let button = self.view.viewWithTag(self.methodName.hashValue) as UIButton!
+                
+                button.titleLabel?.textColor = UIColor.redColor()
                 
                 switch postsResult {
                     
@@ -46,7 +51,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
                     
                     for post in posts {
                         
-                        self.store.fetchImageForPost(post, completion: { (imageResult) -> Void in
+                        self.postStore.fetchImageForPost(post, completion: { (imageResult) -> Void in
 
                             
                             
@@ -65,7 +70,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
                         
                     }
 
-                    self.postDataSource.store = self.store
+                    self.postDataSource.store = self.postStore
                     
                 case let PostResult.Failure(error):
                     
@@ -144,7 +149,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
                 let navController = segue.destinationViewController as UINavigationController
                 let destinationVC = navController.topViewController as PostViewController
                 destinationVC.post = post
-                destinationVC.store = store
+                destinationVC.postStore = postStore
+                destinationVC.tokenStore = tokenStore
                 
             }
             
@@ -183,6 +189,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     
     @IBAction func hotClicked(sender: AnyObject) {
         
+        
         nextPaging = false
         methodName = Method.Hot
         
@@ -213,7 +220,7 @@ extension MainViewController: _9gagLayoutDelegate {
         
         let post = postDataSource.posts[indexPath.row]
         
-        store.fetchImageForPost(post, completion: { (imageResult) -> Void in
+        postStore.fetchImageForPost(post, completion: { (imageResult) -> Void in
             
             switch imageResult {
                 

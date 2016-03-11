@@ -12,14 +12,43 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var isLogged: Bool = false
+    var access_token: String?
+    
+    class var sharedInstance: AppDelegate {
+        
+        struct Static {
+            
+            static var onceToken: dispatch_once_t = 0
+            static var instance: AppDelegate? = nil
+            
+        }
+        dispatch_once(&Static.onceToken, { () -> Void in
+            
+            Static.instance = AppDelegate()
+            
+        })
+        
+        return Static.instance!
+        
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         let navViewController = self.window?.rootViewController as UINavigationController
         let mainViewController = navViewController.topViewController as MainViewController
-        mainViewController.store = PostStore()
+        mainViewController.postStore = PostStore()
+        mainViewController.tokenStore = TokenStore()
+        
+        let access_token: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("Token")
+        
+        if let token: AnyObject = access_token {
+            
+            self.access_token = token as? String
+            isLogged = true
+            
+        }
         
         return true
     }
