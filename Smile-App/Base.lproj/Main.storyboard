@@ -103,6 +103,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHL-Qn-EGp">
                                                     <rect key="frame" x="92" y="282" width="68" height="30"/>
                                                     <state key="normal" title="Dislike">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -112,6 +113,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCv-48-uID">
                                                     <rect key="frame" x="176" y="282" width="68" height="30"/>
                                                     <state key="normal" title="Comment">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -127,6 +129,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOF-k9-EPu">
                                                     <rect key="frame" x="8" y="282" width="68" height="30"/>
                                                     <state key="normal" title="Like">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -187,7 +190,6 @@
                                             <outlet property="playButton" destination="WI8-Bl-Og9" id="cJ5-hv-WnX"/>
                                             <outlet property="spinner" destination="dCO-hV-Taz" id="N3z-jI-XZR"/>
                                             <outlet property="votesLabel" destination="yaW-tp-sQk" id="fnZ-Q1-8AN"/>
-                                            <segue destination="TK2-bs-Ekw" kind="presentation" identifier="ShowPost" id="Ht8-Y4-Evn"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -210,6 +212,7 @@
                         <outlet property="freshButton" destination="PCq-vx-TP9" id="KtM-Gj-z6f"/>
                         <outlet property="hotButton" destination="GCV-Bg-Um2" id="5em-yj-PSb"/>
                         <outlet property="trendingButton" destination="Hy1-gQ-LIg" id="3kl-PN-qfn"/>
+                        <segue destination="TK2-bs-Ekw" kind="presentation" identifier="ShowPost" id="WRr-Xt-ilz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -237,6 +240,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mV-kD-kqB">
                                         <rect key="frame" x="46" y="7" width="45" height="30"/>
                                         <state key="normal" title="Dislike">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -246,6 +250,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDz-rg-1GA">
                                         <rect key="frame" x="99" y="7" width="75" height="30"/>
                                         <state key="normal" title="Comments">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -255,6 +260,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfx-6p-jmQ">
                                         <rect key="frame" x="182" y="7" width="36" height="30"/>
                                         <state key="normal" title="More">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -267,6 +273,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiO-qQ-YuQ">
                                         <rect key="frame" x="8" y="7" width="30" height="30"/>
                                         <state key="normal" title="Like">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="13F1112" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Post" representedClassName="Post" syncable="YES">
+        <attribute name="caption" attributeType="String" syncable="YES"/>
+        <attribute name="comments" attributeType="Transformable" syncable="YES"/>
+        <attribute name="imageURLs" attributeType="Transformable" syncable="YES"/>
+        <attribute name="link" attributeType="Transformable" syncable="YES"/>
+        <attribute name="mediaLinks" attributeType="Transformable" syncable="YES"/>
+        <attribute name="postID" attributeType="String" syncable="YES"/>
+        <attribute name="votes" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Post" positionX="-63" positionY="-18" width="128" height="150"/>
+    </elements>
+</model>

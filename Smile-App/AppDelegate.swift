@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var isLogged: Bool = false
+    var isLogged: Bool?
     var access_token: String?
     
     class var sharedInstance: AppDelegate {
@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainViewController = navViewController.topViewController as MainViewController
         mainViewController.postStore = PostStore()
         mainViewController.tokenStore = TokenStore()
+        mainViewController.isLogged = self.isLogged
         
         let access_token: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("Token")
         

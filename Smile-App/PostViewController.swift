@@ -8,6 +8,14 @@
 
 import UIKit
 
+enum Type: String {
+    
+    case Like = "like"
+    case Dislike = "dislike"
+    case Unlike = "unlike"
+    
+}
+
 class PostViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -28,7 +36,6 @@ class PostViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        println(AppDelegate.sharedInstance.access_token)
         
     }
     
@@ -76,9 +83,9 @@ class PostViewController: UIViewController {
     
     @IBAction func likeClicked(sender: AnyObject) {
         
-        if AppDelegate.sharedInstance.isLogged {
+        if let isLogged = AppDelegate.sharedInstance.isLogged {
 
-            postStore.voteForPost(post, type: "like", completion: { (voteResult) -> Void in
+            postStore.voteForPost(post, type: Type.Like, token: AppDelegate.sharedInstance.access_token!, completion: { (voteResult) -> Void in
                 
                 println(voteResult)
                 
@@ -94,7 +101,7 @@ class PostViewController: UIViewController {
     
     @IBAction func dislikeClicked(sender: AnyObject) {
         
-        if AppDelegate().isLogged {
+        if AppDelegate().isLogged! {
             
 //            store.voteForPost(post)
             
@@ -108,7 +115,7 @@ class PostViewController: UIViewController {
     
     @IBAction func commentsClicked(sender: AnyObject) {
         
-        if AppDelegate().isLogged {
+        if AppDelegate().isLogged! {
             
 //            store.voteForPost(post)
             
@@ -124,9 +131,42 @@ class PostViewController: UIViewController {
         
         let logInViewController = storyboard?.instantiateViewControllerWithIdentifier("LogInViewController") as LogInViewController
         logInViewController.tokenStore = tokenStore
+        logInViewController.delegate = self
         presentViewController(logInViewController, animated: true) { () -> Void in
             
             
+            
+        }
+        
+    }
+    
+}
+
+extension PostViewController: LogInDelegate {
+    
+    func loggedIn() {
+        
+        if let token = AppDelegate.sharedInstance.access_token {
+            
+            postStore.voteForPost(post, type: Type.Like, token: token, completion: { (voteResult) -> Void in
+                
+                switch voteResult {
+                    
+                case let VoteResult.Success(test):
+                    
+                    let score: AnyObject? = test["score"]
+                    if let scoreNum = score as? NSNumber {
+                        
+                        
+                    }
+                    
+                case let VoteResult.Failure(error):
+                    
+                    break
+                    
+                }
+                
+            })
             
         }
         

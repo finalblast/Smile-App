@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 // MARK: Enums
 
 enum Method: String {
- 
+    
     case Token = "token"
     case Hot = "hot"
     case Trending = "trending"
@@ -43,7 +44,7 @@ enum TokenResult {
 
 enum VoteResult {
     
-    case Success([NSObject : AnyObject])
+    case Success([String : AnyObject])
     case Failure(NSError)
     
 }
@@ -51,19 +52,20 @@ enum VoteResult {
 struct _9gagAPI {
     
     private static let baseURLString = "http://infinigag.k3min.eu/"
-
+    
     private static var nextPagingID: NSString?
     
     private static func _9gagURL(#method: Method, parameter: [String: String]?, isVote: Bool) -> NSURL {
-
+        
         if let param = parameter {
             
             if isVote {
                 
                 let type = param["type"]!
                 let id = param["id"]!
-                let access_token = AppDelegate().access_token
-                return NSURL(string: "\(baseURLString)\(method.rawValue)/\(type)/\(id)?\(access_token)")!
+                let access_token = param["token"]!
+                println("\(baseURLString)\(method.rawValue)/\(type)/\(id)?access_token=\(access_token)")
+                return NSURL(string: "\(baseURLString)\(method.rawValue)/\(type)/\(id)?access_token=\(access_token)")!
                 
             }
             
@@ -73,7 +75,7 @@ struct _9gagAPI {
         }
         
         return NSURL(string: "\(baseURLString)\(method.rawValue)")!
-    
+        
     }
     
     static func getToken() -> NSURL {
@@ -82,9 +84,9 @@ struct _9gagAPI {
         
     }
     
-    static func voteForPost(#type: String, id: String) -> NSURL {
+    static func voteForPost(#type: Type, id: String, token: String) -> NSURL {
         
-        return _9gagURL(method: Method.Vote, parameter: ["type" : type, "id" : id], isVote: false)
+        return _9gagURL(method: Method.Vote, parameter: ["type" : type.rawValue, "id" : id, "token": token], isVote: true)
         
     }
     
@@ -142,7 +144,7 @@ struct _9gagAPI {
             return TokenResult.Failure(actualError)
             
         } else {
-
+            
             let jsonDic = jsonObject as [NSObject: AnyObject]
             let token = jsonDic["access_token"] as String?
             
@@ -151,7 +153,7 @@ struct _9gagAPI {
                 return TokenResult.Success(userToken)
                 
             } else {
-             
+                
                 return TokenResult.Failure(NSError(domain: "Unauthorized", code: 401, userInfo:nil))
                 
             }
@@ -170,8 +172,8 @@ struct _9gagAPI {
             return VoteResult.Failure(actualError)
             
         } else {
-
-            let jsonDic = jsonObject as [NSObject: AnyObject]?
+            
+            let jsonDic = jsonObject as [String: AnyObject]?
             
             if let dic = jsonDic {
                 
@@ -207,7 +209,7 @@ struct _9gagAPI {
         
     }
     
-    static func postsFromJSONData(#data: NSData) -> PostResult {
+    static func postsFromJSONData(#data: NSData, inContext context: NSManagedObjectContext) -> PostResult {
         
         var error: NSError?
         let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
@@ -225,8 +227,8 @@ struct _9gagAPI {
             var finalPosts = [Post]()
             for postJSON in postsArray {
                 
-                if let post = postFromJSONObject(postJSON) {
-                
+                if let post = postFromJSONObject(postJSON, inContext: context) {
+                    
                     finalPosts.append(post)
                     
                 } else {
@@ -243,7 +245,7 @@ struct _9gagAPI {
         
     }
     
-    private static func postFromJSONObject(json: [String: AnyObject]) -> Post? {
+    private static func postFromJSONObject(json: [String: AnyObject], inContext context: NSManagedObjectContext) -> Post? {
         
         let postId = json["id"] as String
         let caption = json["caption"] as String
@@ -253,17 +255,47 @@ struct _9gagAPI {
         let votes = json["votes"] as [String: AnyObject]
         let comments = json["comments"] as [String: AnyObject]
         
-        if let isMedia = json["media"] as? Bool {
-
-            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: nil, link: postLink!, votes: votes, comments: comments)
+        let fetchRequest = NSFetchRequest(entityName: "Post")
+        var fetchedPhotos: [Post]!
+        context.performBlockAndWait() {
             
-        } else {
+            fetchedPhotos = context.executeFetchRequest(fetchRequest, error: nil) as [Post]
             
-            let mediaLinks = json["media"] as [String: AnyObject]
-            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: mediaLinks, link: postLink!, votes: votes, comments: comments)
+        }
+        
+        if fetchedPhotos.count > 0 {
+            
+            return fetchedPhotos.first
             
         }
 
+        var post: Post!
+        var mediaLinks: [String: AnyObject]!
+        
+        if let isMedia = json["media"] as? Bool {
+            
+            mediaLinks = nil
+            
+        } else {
+            
+            mediaLinks = json["media"] as [String: AnyObject]
+            
+        }
+        context.performBlockAndWait() {
+            
+            post = NSEntityDescription.insertNewObjectForEntityForName("Post", inManagedObjectContext: context) as Post
+            post.postID = postId
+            post.caption = caption
+            post.imageURLs = imageURLs
+            post.link = postLink!
+            post.votes = votes
+            post.comments = comments
+            post.mediaLinks = mediaLinks
+            
+        }
+        
+        return post
+        
     }
     
 }

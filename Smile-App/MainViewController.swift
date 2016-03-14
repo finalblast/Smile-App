@@ -19,6 +19,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     var postStore: PostStore!
     var tokenStore: TokenStore!
     var postDataSource = PostDataSource()
+    var isLogged: Bool!
     
     var nextPaging: Bool!
     
@@ -35,6 +36,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     func fetchPosts() {
         
         postStore.fetchPosts(method: methodName, nextPaging: nextPaging) { (postsResult) -> Void in
+            
+            let allPosts = self.postStore.fetchMainQueuePosts(predicate: nil, sortDescriptors: nil)
+            
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 
                 println(self.methodName.hashValue)
@@ -45,39 +49,29 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
                 
                 button.titleLabel?.textColor = UIColor.redColor()
                 
-                switch postsResult {
+                for post in allPosts {
                     
-                case let PostResult.Success(posts):
-                    
-                    for post in posts {
+                    self.postStore.fetchImageForPost(post, completion: { (imageResult) -> Void in
                         
-                        self.postStore.fetchImageForPost(post, completion: { (imageResult) -> Void in
-
-                            
-                            
-                        })
-                    
-                    }
-                    
-                    if self.nextPaging! {
                         
-                        self.postDataSource.posts.extend(posts)
                         
-                    } else {
-                        
-                        self.postDataSource.posts = posts
-                        self.collectionView.setContentOffset(CGPointZero, animated: true)
-                        
-                    }
-
-                    self.postDataSource.store = self.postStore
-                    
-                case let PostResult.Failure(error):
-                    
-                    println("Error: \(error)")
-                    self.postDataSource.posts.removeAll()
+                    })
                     
                 }
+                
+                if self.nextPaging! {
+                    
+                    self.postDataSource.posts.extend(allPosts)
+                    
+                } else {
+                    
+                    self.postDataSource.posts = allPosts
+                    self.collectionView.setContentOffset(CGPointZero, animated: true)
+                    
+                }
+                
+                self.postDataSource.store = self.postStore
+                
                 self.collectionView.reloadData()
                 self.isLoadingMore = false
                 println(self.postDataSource.posts.count)
@@ -102,6 +96,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         collectionView.delegate = self
         nextPaging = false
         methodName = Method.Hot
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let post = postDataSource.posts[indexPath.row]
+        let postIndex = find(self.postDataSource.posts, post)!
+        let postIndexPath = NSIndexPath(forRow: postIndex, inSection: 0)
+        
+        if let cell = collectionView.cellForItemAtIndexPath(postIndexPath) as? PostCollecionViewCell {
+        
+          
+        
+        }
         
     }
     
@@ -132,6 +140,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
                 let mediaURLString = dicMediaURL["mp4"] as String
                 let mediaURL = NSURL(string: mediaURLString)!
                 cell.playMedia(mediaURL)
+                
+            } else {
+                
+                self.performSegueWithIdentifier("ShowPost", sender: nil)
                 
             }
             

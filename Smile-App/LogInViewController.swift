@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol LogInDelegate {
+    
+    func loggedIn()
+}
+
 class LogInViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
@@ -15,6 +20,15 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     
     var tokenStore: TokenStore!
+    
+    var delegate: LogInDelegate!
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        delegate.loggedIn()
+        
+    }
     
     @IBAction func closeClicked(sender: AnyObject) {
         
@@ -42,13 +56,10 @@ class LogInViewController: UIViewController {
                 let userDefault = NSUserDefaults.standardUserDefaults()
                 userDefault.setObject(token, forKey: "Token")
                 userDefault.synchronize()
-                
-                let postViewController = self.presentingViewController as PostViewController
+                AppDelegate.sharedInstance.isLogged = true
+                AppDelegate.sharedInstance.access_token = token
                 self.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
                     
-                    AppDelegate.sharedInstance.isLogged = true
-                    AppDelegate.sharedInstance.access_token = token
-                    postViewController.viewWillAppear(true)
                     
                 })
                 
