@@ -18,10 +18,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     
     var postStore: PostStore!
     var tokenStore: TokenStore!
+    var scoreStore: ScoreStore!
     var postDataSource = PostDataSource()
-    var isLogged: Bool!
+    var selectedPost: Post?
     
     var nextPaging: Bool!
+    var selectedSection: Int = 1
     
     var methodName: Method! {
         
@@ -36,9 +38,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     func fetchPosts() {
         
         postStore.fetchPosts(method: methodName, nextPaging: nextPaging) { (postsResult) -> Void in
-            
-            let allPosts = self.postStore.fetchMainQueuePosts(predicate: nil, sortDescriptors: nil)
-            
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 
                 println(self.methodName.hashValue)
@@ -46,32 +45,43 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
                 self.trendingButton.titleLabel?.textColor = UIColor.blueColor()
                 self.freshButton.titleLabel?.textColor = UIColor.blueColor()
                 let button = self.view.viewWithTag(self.methodName.hashValue) as UIButton!
+                self.selectedSection = self.methodName.hashValue
                 
                 button.titleLabel?.textColor = UIColor.redColor()
                 
-                for post in allPosts {
+                switch postsResult {
                     
-                    self.postStore.fetchImageForPost(post, completion: { (imageResult) -> Void in
+                case let PostResult.Success(posts):
+                    
+                    for post in posts {
                         
+                        self.postStore.fetchImageForPost(post, completion: { (imageResult) -> Void in
+
+                            
+                            
+                        })
+                    
+                    }
+                    
+                    if self.nextPaging! {
                         
+                        self.postDataSource.posts.extend(posts)
                         
-                    })
+                    } else {
+                        
+                        self.postDataSource.posts = posts
+                        self.collectionView.setContentOffset(CGPointZero, animated: true)
+                        
+                    }
+
+                    self.postDataSource.store = self.postStore
+                    
+                case let PostResult.Failure(error):
+                    
+                    println("Error: \(error)")
+                    self.postDataSource.posts.removeAll()
                     
                 }
-                
-                if self.nextPaging! {
-                    
-                    self.postDataSource.posts.extend(allPosts)
-                    
-                } else {
-                    
-                    self.postDataSource.posts = allPosts
-                    self.collectionView.setContentOffset(CGPointZero, animated: true)
-                    
-                }
-                
-                self.postDataSource.store = self.postStore
-                
                 self.collectionView.reloadData()
                 self.isLoadingMore = false
                 println(self.postDataSource.posts.count)
@@ -93,6 +103,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         }
         
         collectionView.dataSource = postDataSource
+        postDataSource.delegate = self
+        postDataSource.scoreStore = scoreStore
         collectionView.delegate = self
         nextPaging = false
         methodName = Method.Hot
@@ -101,15 +113,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
-        let post = postDataSource.posts[indexPath.row]
-        let postIndex = find(self.postDataSource.posts, post)!
-        let postIndexPath = NSIndexPath(forRow: postIndex, inSection: 0)
         
-        if let cell = collectionView.cellForItemAtIndexPath(postIndexPath) as? PostCollecionViewCell {
-        
-          
-        
-        }
         
     }
     
@@ -160,9 +164,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
                 let post = postDataSource.posts[selectedIndexPath.row]
                 let navController = segue.destinationViewController as UINavigationController
                 let destinationVC = navController.topViewController as PostViewController
+                destinationVC.mainVC = self
                 destinationVC.post = post
                 destinationVC.postStore = postStore
                 destinationVC.tokenStore = tokenStore
+                destinationVC.scoreStore = scoreStore
                 
             }
             
@@ -218,6 +224,54 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         
         nextPaging = false
         methodName = Method.Fresh
+        
+    }
+    
+}
+
+extension MainViewController: LogInProtocol {
+    
+    func showLogInVC() {
+
+        let logInViewController = storyboard?.instantiateViewControllerWithIdentifier("LogInViewController") as LogInViewController
+        logInViewController.tokenStore = tokenStore
+        logInViewController.delegate = self
+        presentViewController(logInViewController, animated: true) { () -> Void in
+ 
+            
+        }
+        
+    }
+    
+}
+
+extension MainViewController: LogInDelegate {
+    
+    func loggedIn() {
+        
+        if let token = AppDelegate.sharedInstance.access_token {
+            
+//            postStore.voteForPost(post, type: Type.Like, token: token, completion: { (voteResult) -> Void in
+            
+//                switch voteResult {
+//                    
+//                case let VoteResult.Success(test):
+//                    
+//                    let score: AnyObject? = test["score"]
+//                    if let scoreNum = score as? NSNumber {
+//                        
+//                        
+//                    }
+//                    
+//                case let VoteResult.Failure(error):
+//                    
+//                    break
+//                    
+//                }
+//                
+//            })
+//            
+        }
         
     }
     

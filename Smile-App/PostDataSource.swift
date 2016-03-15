@@ -12,6 +12,8 @@ class PostDataSource: NSObject, UICollectionViewDataSource {
     
     var posts = [Post]()
     var store: PostStore!
+    var delegate: LogInProtocol!
+    var scoreStore: ScoreStore!
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
@@ -26,6 +28,10 @@ class PostDataSource: NSObject, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UICollectionViewCell", forIndexPath: indexPath) as PostCollecionViewCell
 
         cell.updateWithPost(post)
+        cell.post = post
+        cell.postStore = store
+        cell.scoreStore = scoreStore
+        cell.delegate = delegate
         
         return cell
         

@@ -9,6 +9,12 @@
 import AVFoundation
 import UIKit
 
+protocol LogInProtocol {
+    
+    func showLogInVC()
+    
+}
+
 class PostCollecionViewCell: UICollectionViewCell {
     
     let numberFormatter: NSNumberFormatter = {
@@ -37,19 +43,24 @@ class PostCollecionViewCell: UICollectionViewCell {
     var subView: UIView!
     var avPlayer: AVPlayer!
     
+    var post: Post!
+    var postStore: PostStore!
     var mediaStore = MediaStore()
+    var scoreStore: ScoreStore!
+    
+    var delegate: LogInProtocol!
     
     override func awakeFromNib() {
         
         super.awakeFromNib()
-        updateWithPost(nil)
+        updateWithPost(post)
         
     }
     
     override func prepareForReuse() {
         
         super.prepareForReuse()
-        updateWithPost(nil)
+        updateWithPost(post)
         
     }
     
@@ -97,6 +108,28 @@ class PostCollecionViewCell: UICollectionViewCell {
                 
                 spinner.startAnimating()
                 imageView.image = nil
+                
+            }
+            
+            if let store = scoreStore {
+             
+                println(scoreStore.scoreForKey(currentPost.id))
+                
+                switch scoreStore.scoreForKey(currentPost.id) {
+                    
+                case -1:
+                    likeButton.titleLabel?.textColor = UIColor.whiteColor()
+                    dislikeButton.titleLabel?.textColor = UIColor.blueColor()
+                    
+                case 1:
+                    likeButton.titleLabel?.textColor = UIColor.blueColor()
+                    dislikeButton.titleLabel?.textColor = UIColor.whiteColor()
+                    
+                default:
+                    likeButton.titleLabel?.textColor = UIColor.whiteColor()
+                    dislikeButton.titleLabel?.textColor = UIColor.whiteColor()
+                    
+                }
                 
             }
             
@@ -161,6 +194,30 @@ class PostCollecionViewCell: UICollectionViewCell {
     
     @IBAction func likeClicked(sender: AnyObject) {
         
+        if let isLogged = AppDelegate.sharedInstance.isLogged {
+            
+            postStore.voteForPost(post, type: Type.Like, token: AppDelegate.sharedInstance.access_token!, completion: { (voteResult) -> Void in
+                
+                switch voteResult {
+                    
+                case let VoteResult.Success(votes):
+                    
+                    let score = votes["score"] as? Int
+                    self.scoreStore.setScore(score!, forKey: self.post.id)
+                    
+                case let VoteResult.Failure(error):
+                    
+                    println(error.description)
+                    
+                }
+                
+            })
+            
+        } else {
+
+            delegate.showLogInVC()
+            
+        }
         
     }
     

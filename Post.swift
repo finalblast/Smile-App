@@ -7,31 +7,37 @@
 //
 
 import UIKit
-import CoreData
 
-@objc(Post)
-class Post: NSManagedObject {
+class Post {
     
+    let id: String
+    let caption: String
+    let imageURLs: [String: AnyObject]
+    let mediaLinks: [String: AnyObject]?
+    let link: NSURL
     var image: UIImage?
-    @NSManaged var postID: String
-    @NSManaged var caption: String
-    @NSManaged var imageURLs: [String: AnyObject]
-    @NSManaged var mediaLinks: [String: AnyObject]?
-    @NSManaged var link: NSURL
-    @NSManaged var votes: [String: AnyObject]
-    @NSManaged var comments: [String: AnyObject]
+    let votes: [String: AnyObject]
+    let comments: [String: AnyObject]
     
-    override func awakeFromInsert() {
+    
+    init(id: String, caption: String, urls: [String: AnyObject], mediaLinks: [String: AnyObject]?, link: NSURL, votes: [String: AnyObject], comments: [String: AnyObject]) {
         
-        super.awakeFromInsert()
-        caption = ""
-        postID = ""
-        imageURLs = [String: AnyObject]()
-        mediaLinks = nil
-        link = NSURL()
-        votes = [String: AnyObject]()
-        comments = [String: AnyObject]()
+        self.id = id
+        self.caption = caption
+        self.imageURLs = urls
+        self.mediaLinks = mediaLinks
+        self.link = link
+        self.votes = votes
+        self.comments = comments
         
     }
+    
+}
+
+extension Post: Equatable {}
+
+func ==(lhs: Post, rhs: Post) -> Bool {
+    
+    return lhs.id == rhs.id
     
 }

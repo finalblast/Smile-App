@@ -30,8 +30,10 @@ class PostViewController: UIViewController {
         
     }
     
+    var scoreStore: ScoreStore!
     var postStore: PostStore!
     var tokenStore: TokenStore!
+    var mainVC: MainViewController!
     
     override func viewWillAppear(animated: Bool) {
         
@@ -75,7 +77,8 @@ class PostViewController: UIViewController {
         
         presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             
-            
+            let button = self.mainVC.view.viewWithTag(self.mainVC.selectedSection) as UIButton
+            button.titleLabel?.textColor = UIColor.redColor()
             
         })
         
@@ -87,7 +90,18 @@ class PostViewController: UIViewController {
 
             postStore.voteForPost(post, type: Type.Like, token: AppDelegate.sharedInstance.access_token!, completion: { (voteResult) -> Void in
                 
-                println(voteResult)
+                switch voteResult {
+                    
+                case let VoteResult.Success(votes):
+                    
+                    let score = votes["score"] as? Int
+                    self.scoreStore.setScore(score!, forKey: self.post.id)
+                    
+                case let VoteResult.Failure(error):
+                    
+                    println(error.description)
+                    
+                }
                 
             })
             

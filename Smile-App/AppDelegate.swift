@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainViewController = navViewController.topViewController as MainViewController
         mainViewController.postStore = PostStore()
         mainViewController.tokenStore = TokenStore()
-        mainViewController.isLogged = self.isLogged
+        mainViewController.scoreStore = ScoreStore()
         
         let access_token: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("Token")
         

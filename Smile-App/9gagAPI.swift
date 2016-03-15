@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import CoreData
 
 // MARK: Enums
 
 enum Method: String {
-    
+ 
     case Token = "token"
     case Hot = "hot"
     case Trending = "trending"
@@ -209,7 +208,7 @@ struct _9gagAPI {
         
     }
     
-    static func postsFromJSONData(#data: NSData, inContext context: NSManagedObjectContext) -> PostResult {
+    static func postsFromJSONData(#data: NSData) -> PostResult {
         
         var error: NSError?
         let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
@@ -227,8 +226,8 @@ struct _9gagAPI {
             var finalPosts = [Post]()
             for postJSON in postsArray {
                 
-                if let post = postFromJSONObject(postJSON, inContext: context) {
-                    
+                if let post = postFromJSONObject(postJSON) {
+                
                     finalPosts.append(post)
                     
                 } else {
@@ -245,7 +244,7 @@ struct _9gagAPI {
         
     }
     
-    private static func postFromJSONObject(json: [String: AnyObject], inContext context: NSManagedObjectContext) -> Post? {
+    private static func postFromJSONObject(json: [String: AnyObject]) -> Post? {
         
         let postId = json["id"] as String
         let caption = json["caption"] as String
@@ -255,47 +254,17 @@ struct _9gagAPI {
         let votes = json["votes"] as [String: AnyObject]
         let comments = json["comments"] as [String: AnyObject]
         
-        let fetchRequest = NSFetchRequest(entityName: "Post")
-        var fetchedPhotos: [Post]!
-        context.performBlockAndWait() {
-            
-            fetchedPhotos = context.executeFetchRequest(fetchRequest, error: nil) as [Post]
-            
-        }
-        
-        if fetchedPhotos.count > 0 {
-            
-            return fetchedPhotos.first
-            
-        }
-
-        var post: Post!
-        var mediaLinks: [String: AnyObject]!
-        
         if let isMedia = json["media"] as? Bool {
-            
-            mediaLinks = nil
+
+            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: nil, link: postLink!, votes: votes, comments: comments)
             
         } else {
             
-            mediaLinks = json["media"] as [String: AnyObject]
+            let mediaLinks = json["media"] as [String: AnyObject]
+            return Post(id: postId, caption: caption, urls: imageURLs, mediaLinks: mediaLinks, link: postLink!, votes: votes, comments: comments)
             
         }
-        context.performBlockAndWait() {
-            
-            post = NSEntityDescription.insertNewObjectForEntityForName("Post", inManagedObjectContext: context) as Post
-            post.postID = postId
-            post.caption = caption
-            post.imageURLs = imageURLs
-            post.link = postLink!
-            post.votes = votes
-            post.comments = comments
-            post.mediaLinks = mediaLinks
-            
-        }
-        
-        return post
-        
+
     }
     
 }

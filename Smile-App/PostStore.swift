@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import CoreData
 
 class PostStore {
     
-    let coreDataStack = CoreDataStack(modelName: "Smile-App")
     var imageStore = ImageStore()
     
     let session: NSURLSession = {
@@ -49,24 +47,7 @@ class PostStore {
         
         let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
             
-            var result = self.processPostsRequest(data: data, error: error)
-            switch result {
-                
-            case let PostResult.Success(posts):
-                let mainQueueContext = self.coreDataStack.mainQueueContext
-                var error: NSError?
-                mainQueueContext.obtainPermanentIDsForObjects(posts, error: &error)
-                let objectIDs = posts.map{ $0.objectID }
-                let predicate = NSPredicate(format: "self IN %@", objectIDs)
-                self.coreDataStack.saveChanges()
-                let mainQueuePosts = self.fetchMainQueuePosts(predicate: predicate, sortDescriptors: nil)
-                result = PostResult.Success(mainQueuePosts)
-                
-            case let PostResult.Failure(error):
-                println(error.description)
-                break
-                
-            }
+            let result = self.processPostsRequest(data: data, error: error)
             completion(result)
             
         })
@@ -79,7 +60,7 @@ class PostStore {
         
         if let jsonData = data {
             
-            return _9gagAPI.postsFromJSONData(data: jsonData, inContext: self.coreDataStack.mainQueueContext)
+            return _9gagAPI.postsFromJSONData(data: jsonData)
             
         } else {
             
@@ -89,34 +70,11 @@ class PostStore {
         
     }
     
-    func fetchMainQueuePosts(predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [Post] {
-        
-        let fetchRequest = NSFetchRequest(entityName: "Post")
-        
-        let mainQueueContext = self.coreDataStack.mainQueueContext
-        var mainQueuePosts: [Post]?
-        var fetchRequestError: NSError?
-        mainQueueContext.performBlockAndWait { () -> Void in
-            
-            mainQueuePosts = mainQueueContext.executeFetchRequest(fetchRequest, error: &fetchRequestError) as? [Post]
-            
-        }
-        
-        if let actualError = fetchRequestError {
-            
-            println(actualError.description)
-            
-        }
-        
-        return mainQueuePosts!
-        
-    }
-    
     func fetchImageForPost(post: Post, completion: (ImageResult) -> Void) {
         
         var semaphore = dispatch_semaphore_create(0)
         
-        let postId = post.postID
+        let postId = post.id
         if let image = imageStore.imageForKey(postId) {
             
             post.image = image
@@ -179,7 +137,7 @@ class PostStore {
     
     func voteForPost(post: Post, type: Type, token: String, completion: (VoteResult) -> Void) {
         
-        let url = _9gagAPI.voteForPost(type: type, id: post.postID, token: token)
+        let url = _9gagAPI.voteForPost(type: type, id: post.id, token: token)
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         

@@ -23,10 +23,9 @@
 		505ECA481C88371C002BC417 /* Optional+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA471C88371C002BC417 /* Optional+Unwrap.swift */; };
 		505ECA4B1C8846D1002BC417 /* PostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ECA4A1C8846D1002BC417 /* PostDataSource.swift */; };
 		508D4DF71C96C24E005A0558 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D4DF61C96C24E005A0558 /* Post.swift */; };
-		508D97011C96A3030009F3A1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D97001C96A3030009F3A1 /* CoreDataStack.swift */; };
+		50DB44361C97CA5F00D5CFCC /* ScoreStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DB44351C97CA5F00D5CFCC /* ScoreStore.swift */; };
 		50E51C761C89201300F77182 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E51C751C89201300F77182 /* PostCollectionViewCell.swift */; };
 		50E51C781C892BFF00F77182 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E51C771C892BFF00F77182 /* PostViewController.swift */; };
-		50F6CC8E1C969FE6005D3425 /* Smile-App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50F6CC8C1C969FE6005D3425 /* Smile-App.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,10 +59,9 @@
 		505ECA471C88371C002BC417 /* Optional+Unwrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Optional+Unwrap.swift"; path = "Smile-App/Optional+Unwrap.swift"; sourceTree = "<group>"; };
 		505ECA4A1C8846D1002BC417 /* PostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostDataSource.swift; path = "Smile-App/PostDataSource.swift"; sourceTree = "<group>"; };
 		508D4DF61C96C24E005A0558 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		508D97001C96A3030009F3A1 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		50DB44351C97CA5F00D5CFCC /* ScoreStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStore.swift; sourceTree = "<group>"; };
 		50E51C751C89201300F77182 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostCollectionViewCell.swift; path = "Smile-App/PostCollectionViewCell.swift"; sourceTree = "<group>"; };
 		50E51C771C892BFF00F77182 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		50F6CC8D1C969FE6005D3425 /* Smile-App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Smile-App.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +85,6 @@
 		502BF9EA1C896DCA004E8658 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				50F6CC8C1C969FE6005D3425 /* Smile-App.xcdatamodeld */,
 				508D4DF61C96C24E005A0558 /* Post.swift */,
 			);
 			name = DataModels;
@@ -96,6 +93,7 @@
 		502BF9EB1C896DDC004E8658 /* DataStores */ = {
 			isa = PBXGroup;
 			children = (
+				50DB44351C97CA5F00D5CFCC /* ScoreStore.swift */,
 				502BF9F31C898076004E8658 /* ImageStore.swift */,
 				505ECA431C882F7B002BC417 /* PostStore.swift */,
 				502021061C8D87E900722470 /* MediaStore.swift */,
@@ -139,7 +137,6 @@
 		505ECA111C8822B1002BC417 = {
 			isa = PBXGroup;
 			children = (
-				508D96FF1C96A2E80009F3A1 /* CoreDataStack */,
 				502BF9F51C899209004E8658 /* Cells */,
 				502BF9EE1C896E26004E8658 /* CustomLayouts */,
 				502BF9ED1C896E09004E8658 /* DataSources */,
@@ -208,14 +205,6 @@
 				505ECA471C88371C002BC417 /* Optional+Unwrap.swift */,
 			);
 			name = Libraries;
-			sourceTree = "<group>";
-		};
-		508D96FF1C96A2E80009F3A1 /* CoreDataStack */ = {
-			isa = PBXGroup;
-			children = (
-				508D97001C96A3030009F3A1 /* CoreDataStack.swift */,
-			);
-			name = CoreDataStack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,12 +310,11 @@
 				502021071C8D87E900722470 /* MediaStore.swift in Sources */,
 				5010A05B1C927E0E00E3EA0D /* TokenStore.swift in Sources */,
 				502BF9F41C898076004E8658 /* ImageStore.swift in Sources */,
-				50F6CC8E1C969FE6005D3425 /* Smile-App.xcdatamodeld in Sources */,
 				50E51C781C892BFF00F77182 /* PostViewController.swift in Sources */,
 				505ECA421C882799002BC417 /* 9gagAPI.swift in Sources */,
 				505ECA441C882F7B002BC417 /* PostStore.swift in Sources */,
-				508D97011C96A3030009F3A1 /* CoreDataStack.swift in Sources */,
 				502BF9F21C896F2C004E8658 /* 9gagLayout.swift in Sources */,
+				50DB44361C97CA5F00D5CFCC /* ScoreStore.swift in Sources */,
 				5010A0591C927B9400E3EA0D /* LogInViewController.swift in Sources */,
 				505ECA4B1C8846D1002BC417 /* PostDataSource.swift in Sources */,
 				508D4DF71C96C24E005A0558 /* Post.swift in Sources */,
@@ -539,19 +527,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		50F6CC8C1C969FE6005D3425 /* Smile-App.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				50F6CC8D1C969FE6005D3425 /* Smile-App.xcdatamodel */,
-			);
-			currentVersion = 50F6CC8D1C969FE6005D3425 /* Smile-App.xcdatamodel */;
-			path = "Smile-App.xcdatamodeld";
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 505ECA121C8822B1002BC417 /* Project object */;
 }
