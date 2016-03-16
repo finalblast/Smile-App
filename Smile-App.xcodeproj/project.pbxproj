@@ -26,6 +26,15 @@
 		50DB44361C97CA5F00D5CFCC /* ScoreStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DB44351C97CA5F00D5CFCC /* ScoreStore.swift */; };
 		50E51C761C89201300F77182 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E51C751C89201300F77182 /* PostCollectionViewCell.swift */; };
 		50E51C781C892BFF00F77182 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E51C771C892BFF00F77182 /* PostViewController.swift */; };
+		50F267BC1C9951490037E849 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F267A41C9950060037E849 /* PhotosUI.framework */; };
+		50F267BD1C9951490037E849 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F267A61C9950060037E849 /* Photos.framework */; };
+		50F267C21C9951490037E849 /* PhotoEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F267C11C9951490037E849 /* PhotoEditingViewController.swift */; };
+		50F267C41C9951490037E849 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50F267C31C9951490037E849 /* MainInterface.storyboard */; };
+		50F267C71C9951490037E849 /* PosterizeExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 50F267BB1C9951490037E849 /* PosterizeExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		50F267E61C995DF70037E849 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F267E51C995DF70037E849 /* ShareViewController.swift */; };
+		50F267E81C995DF70037E849 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50F267E71C995DF70037E849 /* MainInterface.storyboard */; };
+		50F267EB1C995DF70037E849 /* Nick.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 50F267E11C995DF60037E849 /* Nick.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		50F267F01C9963B10037E849 /* AudienceSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F267EF1C9963B10037E849 /* AudienceSelectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +45,36 @@
 			remoteGlobalIDString = 505ECA191C8822B1002BC417;
 			remoteInfo = "Smile-App";
 		};
+		50F267C51C9951490037E849 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 505ECA121C8822B1002BC417 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50F267BA1C9951490037E849;
+			remoteInfo = PosterizeExtension;
+		};
+		50F267E91C995DF70037E849 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 505ECA121C8822B1002BC417 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50F267E01C995DF60037E849;
+			remoteInfo = Nick;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		50F267B61C9950070037E849 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				50F267C71C9951490037E849 /* PosterizeExtension.appex in Embed App Extensions */,
+				50F267EB1C995DF70037E849 /* Nick.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5010A0581C927B9400E3EA0D /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +100,17 @@
 		50DB44351C97CA5F00D5CFCC /* ScoreStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStore.swift; sourceTree = "<group>"; };
 		50E51C751C89201300F77182 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostCollectionViewCell.swift; path = "Smile-App/PostCollectionViewCell.swift"; sourceTree = "<group>"; };
 		50E51C771C892BFF00F77182 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		50F267A41C9950060037E849 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
+		50F267A61C9950060037E849 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		50F267BB1C9951490037E849 /* PosterizeExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PosterizeExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		50F267C01C9951490037E849 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50F267C11C9951490037E849 /* PhotoEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditingViewController.swift; sourceTree = "<group>"; };
+		50F267C31C9951490037E849 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		50F267E11C995DF60037E849 /* Nick.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Nick.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		50F267E41C995DF70037E849 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50F267E51C995DF70037E849 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		50F267E71C995DF70037E849 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		50F267EF1C9963B10037E849 /* AudienceSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudienceSelectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +122,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		505ECA2C1C8822B2002BC417 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50F267B81C9951490037E849 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50F267BC1C9951490037E849 /* PhotosUI.framework in Frameworks */,
+				50F267BD1C9951490037E849 /* Photos.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50F267DE1C995DF60037E849 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -146,6 +211,9 @@
 				505ECA491C883722002BC417 /* Libraries */,
 				505ECA1C1C8822B1002BC417 /* Smile-App */,
 				505ECA321C8822B2002BC417 /* Smile-AppTests */,
+				50F267BE1C9951490037E849 /* PosterizeExtension */,
+				50F267E21C995DF60037E849 /* Nick */,
+				50F267A31C9950060037E849 /* Frameworks */,
 				505ECA1B1C8822B1002BC417 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -155,6 +223,8 @@
 			children = (
 				505ECA1A1C8822B1002BC417 /* Smile-App.app */,
 				505ECA2F1C8822B2002BC417 /* Smile-AppTests.xctest */,
+				50F267BB1C9951490037E849 /* PosterizeExtension.appex */,
+				50F267E11C995DF60037E849 /* Nick.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,6 +277,52 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
+		50F267A31C9950060037E849 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				50F267A41C9950060037E849 /* PhotosUI.framework */,
+				50F267A61C9950060037E849 /* Photos.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50F267BE1C9951490037E849 /* PosterizeExtension */ = {
+			isa = PBXGroup;
+			children = (
+				50F267C11C9951490037E849 /* PhotoEditingViewController.swift */,
+				50F267C31C9951490037E849 /* MainInterface.storyboard */,
+				50F267BF1C9951490037E849 /* Supporting Files */,
+			);
+			path = PosterizeExtension;
+			sourceTree = "<group>";
+		};
+		50F267BF1C9951490037E849 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				50F267C01C9951490037E849 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		50F267E21C995DF60037E849 /* Nick */ = {
+			isa = PBXGroup;
+			children = (
+				50F267EF1C9963B10037E849 /* AudienceSelectionViewController.swift */,
+				50F267E51C995DF70037E849 /* ShareViewController.swift */,
+				50F267E71C995DF70037E849 /* MainInterface.storyboard */,
+				50F267E31C995DF70037E849 /* Supporting Files */,
+			);
+			path = Nick;
+			sourceTree = "<group>";
+		};
+		50F267E31C995DF70037E849 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				50F267E41C995DF70037E849 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -217,10 +333,13 @@
 				505ECA161C8822B1002BC417 /* Sources */,
 				505ECA171C8822B1002BC417 /* Frameworks */,
 				505ECA181C8822B1002BC417 /* Resources */,
+				50F267B61C9950070037E849 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				50F267C61C9951490037E849 /* PBXTargetDependency */,
+				50F267EA1C995DF70037E849 /* PBXTargetDependency */,
 			);
 			name = "Smile-App";
 			productName = "Smile-App";
@@ -245,6 +364,40 @@
 			productReference = 505ECA2F1C8822B2002BC417 /* Smile-AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		50F267BA1C9951490037E849 /* PosterizeExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50F267C81C9951490037E849 /* Build configuration list for PBXNativeTarget "PosterizeExtension" */;
+			buildPhases = (
+				50F267B71C9951490037E849 /* Sources */,
+				50F267B81C9951490037E849 /* Frameworks */,
+				50F267B91C9951490037E849 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PosterizeExtension;
+			productName = PosterizeExtension;
+			productReference = 50F267BB1C9951490037E849 /* PosterizeExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		50F267E01C995DF60037E849 /* Nick */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50F267EC1C995DF70037E849 /* Build configuration list for PBXNativeTarget "Nick" */;
+			buildPhases = (
+				50F267DD1C995DF60037E849 /* Sources */,
+				50F267DE1C995DF60037E849 /* Frameworks */,
+				50F267DF1C995DF60037E849 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nick;
+			productName = Nick;
+			productReference = 50F267E11C995DF60037E849 /* Nick.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -260,6 +413,12 @@
 					505ECA2E1C8822B2002BC417 = {
 						CreatedOnToolsVersion = 6.1;
 						TestTargetID = 505ECA191C8822B1002BC417;
+					};
+					50F267BA1C9951490037E849 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					50F267E01C995DF60037E849 = {
+						CreatedOnToolsVersion = 6.1;
 					};
 				};
 			};
@@ -278,6 +437,8 @@
 			targets = (
 				505ECA191C8822B1002BC417 /* Smile-App */,
 				505ECA2E1C8822B2002BC417 /* Smile-AppTests */,
+				50F267BA1C9951490037E849 /* PosterizeExtension */,
+				50F267E01C995DF60037E849 /* Nick */,
 			);
 		};
 /* End PBXProject section */
@@ -297,6 +458,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50F267B91C9951490037E849 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50F267C41C9951490037E849 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50F267DF1C995DF60037E849 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50F267E81C995DF70037E849 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +510,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		50F267B71C9951490037E849 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50F267C21C9951490037E849 /* PhotoEditingViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50F267DD1C995DF60037E849 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50F267E61C995DF70037E849 /* ShareViewController.swift in Sources */,
+				50F267F01C9963B10037E849 /* AudienceSelectionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -340,6 +534,16 @@
 			isa = PBXTargetDependency;
 			target = 505ECA191C8822B1002BC417 /* Smile-App */;
 			targetProxy = 505ECA301C8822B2002BC417 /* PBXContainerItemProxy */;
+		};
+		50F267C61C9951490037E849 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50F267BA1C9951490037E849 /* PosterizeExtension */;
+			targetProxy = 50F267C51C9951490037E849 /* PBXContainerItemProxy */;
+		};
+		50F267EA1C995DF70037E849 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50F267E01C995DF60037E849 /* Nick */;
+			targetProxy = 50F267E91C995DF70037E849 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -446,6 +650,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Smile-App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -456,6 +661,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Smile-App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -496,6 +702,58 @@
 			};
 			name = Release;
 		};
+		50F267C91C9951490037E849 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PosterizeExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		50F267CA1C9951490037E849 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PosterizeExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		50F267ED1C995DF70037E849 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Nick/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		50F267EE1C995DF70037E849 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Nick/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -525,6 +783,23 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		50F267C81C9951490037E849 /* Build configuration list for PBXNativeTarget "PosterizeExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50F267C91C9951490037E849 /* Debug */,
+				50F267CA1C9951490037E849 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50F267EC1C995DF70037E849 /* Build configuration list for PBXNativeTarget "Nick" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50F267ED1C995DF70037E849 /* Debug */,
+				50F267EE1C995DF70037E849 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

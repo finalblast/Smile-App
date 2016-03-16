@@ -66,6 +66,8 @@ class PostCollecionViewCell: UICollectionViewCell {
     
     func updateWithPost(post: Post?) {
         
+        println("Update With Post")
+        
         playButton.hidden = true
         
         if let player = avPlayer {
@@ -212,6 +214,8 @@ class PostCollecionViewCell: UICollectionViewCell {
                 }
                 
             })
+            
+            updateWithPost(post)
             
         } else {
 
